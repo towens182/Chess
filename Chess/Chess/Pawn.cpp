@@ -11,11 +11,8 @@ Pawn::~Pawn()
 {
 }
 
-void Pawn::move()
-{
-}
 
-bool Pawn::canMove()
+bool Pawn::Move()
 {
 	return false;
 }

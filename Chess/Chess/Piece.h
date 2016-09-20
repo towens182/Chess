@@ -10,8 +10,7 @@ public:
 	Piece() {};
 	~Piece() {};
 	
-	virtual void Move() {};
-	virtual bool canMove() {};
+	virtual bool Move() { return false; };
 	virtual std::string getPieceName() { return "Piece";};
 
 private:

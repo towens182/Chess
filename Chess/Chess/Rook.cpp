@@ -11,11 +11,8 @@ Rook::~Rook()
 {
 }
 
-void Rook::Move()
-{
-}
 
-bool Rook::canMove()
+bool Rook::Move()
 {
 	return false;
 }

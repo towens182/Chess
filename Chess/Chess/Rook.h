@@ -7,8 +7,7 @@ public:
 	Rook();
 	~Rook();
 
-	void Move();
-	bool canMove();
+	bool Move();
 	std::string getPieceName();
 };
 

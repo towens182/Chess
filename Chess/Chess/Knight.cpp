@@ -11,11 +11,7 @@ Knight::~Knight()
 {
 }
 
-void Knight::Move()
-{
-}
-
-bool Knight::canMove()
+bool Knight::Move()
 {
 	return false;
 }

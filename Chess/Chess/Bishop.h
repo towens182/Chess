@@ -7,8 +7,8 @@ public:
 	Bishop();
 	~Bishop();
 
-	void Move();
-	bool canMove();
+	
+	bool Move();
 	std::string getPieceName();
 };
 

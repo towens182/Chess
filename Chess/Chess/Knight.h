@@ -7,8 +7,7 @@ public:
 	Knight();
 	~Knight();
 
-	void Move();
-	bool canMove();
+	bool Move();
 	std::string getPieceName();
 };
 

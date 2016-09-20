@@ -11,11 +11,8 @@ Bishop::~Bishop()
 {
 }
 
-void Bishop::Move()
-{
-}
 
-bool Bishop::canMove()
+bool Bishop::Move()
 {
 	return false;
 }

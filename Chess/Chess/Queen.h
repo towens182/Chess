@@ -7,8 +7,8 @@ public:
 	Queen();
 	~Queen();
 
-	void Move();
-	bool canMove();
+
+	bool Move();
 	std::string getPieceName();
 };
 

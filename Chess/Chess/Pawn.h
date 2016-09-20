@@ -7,8 +7,8 @@ public:
 	Pawn();
 	~Pawn();
 
-	void move();
-	bool canMove();
+	
+	bool Move();
 	std::string getPieceName();
 };
 

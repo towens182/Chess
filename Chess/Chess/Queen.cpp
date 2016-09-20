@@ -11,11 +11,7 @@ Queen::~Queen()
 {
 }
 
-void Queen::Move()
-{
-}
-
-bool Queen::canMove()
+bool Queen::Move()
 {
 	return false;
 }

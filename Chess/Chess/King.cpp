@@ -11,11 +11,7 @@ King::~King()
 {
 }
 
-void King::Move()
-{
-}
-
-bool King::canMove()
+bool King::Move()
 {
 	return false;
 }
