@@ -15,6 +15,11 @@ void Pawn::move()
 {
 }
 
+bool Pawn::canMove()
+{
+	return false;
+}
+
 std::string Pawn::getPieceName()
 {
 	return "Pawn";

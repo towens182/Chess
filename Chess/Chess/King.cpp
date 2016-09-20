@@ -15,6 +15,11 @@ void King::Move()
 {
 }
 
+bool King::canMove()
+{
+	return false;
+}
+
 std::string King::getPieceName()
 {
 	return "King";

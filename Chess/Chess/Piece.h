@@ -11,6 +11,7 @@ public:
 	~Piece() {};
 	
 	virtual void Move() {};
+	virtual bool canMove() {};
 	virtual std::string getPieceName() { return "Piece";};
 
 private:

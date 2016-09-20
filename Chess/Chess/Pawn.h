@@ -8,6 +8,7 @@ public:
 	~Pawn();
 
 	void move();
+	bool canMove();
 	std::string getPieceName();
 };
 

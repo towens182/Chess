@@ -8,6 +8,7 @@ public:
 	~Knight();
 
 	void Move();
+	bool canMove();
 	std::string getPieceName();
 };
 
