@@ -12,9 +12,11 @@ public:
 	
 	virtual bool Move() =0;
 	virtual std::string getPieceName() =0;
+	void setLocation(int x, int y);
 
 private:
 	std::string name;
+	int row, col;
 };
 
 
