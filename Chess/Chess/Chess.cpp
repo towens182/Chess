@@ -13,12 +13,12 @@
 #include "Rook.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 enum GameStatus { NONE, INPROGRESS, END };
 GameStatus gameStatus = NONE;
 
 void Menu(GameStatus& gameStatus);
-void createObjects();
 void drawBoard();
 
 
@@ -26,14 +26,31 @@ int main()
 {
 	using namespace std;
 
+	//for debugging purposes
+	int x;
 	
 
-	cout << "\t\t-----WELCOME TO CHESS-----" << endl << endl;
+	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
 
 	do {
 
 		Menu(gameStatus);
+
+		if (gameStatus == NONE)
+		{
+			cout << "GAME START";
+			Board * board = new Board();
+			gameStatus = INPROGRESS;
+		}
+		//For debugging purposes
+		cin >> x;
 	} while (gameStatus != END);
+
+
+
+
+	delete board;
+
     return 0;
 }
 
@@ -56,34 +73,35 @@ void Menu(GameStatus& gameStatus)
 
 			if (command == 'S' || command == 's')
 			{
-				gameStatus = INPROGRESS;
-				createObjects();
-				cout << string(10, '\n')
-					 << "\t\t-----STARTING NEW GAME OF CHESS------"
+				system("CLS");
+				cout << "\t\t*****STARTING NEW GAME OF CHESS*****"
 					 << endl
-					 << "\t\t-----WHITE BEGINS-----"
+					 << "\t\t\t***WHITE BEGINS***"
 					 << endl;
-
-				return;
+				
 			}
 			//If user tries to enter a command before starting a game
 			//tell them and retry menu
 			else if (command == 'E' || command == 'e' || command == 'M' || command == 'm')
 			{
-				cout << string(20, '\n')
-				 	 << "\t-----PLEASE START THE GAME FIRST-----!"
+				system("CLS");
+				cout << "\t\t*****PLEASE START THE GAME FIRST*****"
+					 << endl
 					 << endl;
 
 				Menu(gameStatus);
 			}
 			else
 			{
-				throw string("Not a valid input!");
+				throw string("\t\t*****NOT A VALID INPUT!!*****");
 			}
 		}
 		catch (string message)
 		{
-			cout << endl << message << endl;
+			system("CLS");
+			cout << message 
+				 << endl 
+				 << endl;
 			Menu(gameStatus);
 		}
 	}
@@ -93,60 +111,10 @@ void Menu(GameStatus& gameStatus)
 			<< endl
 			<< "E - End Game"
 			<< endl;
-			
+			//Function for move
 	}
-}
-void createObjects()
-{
-
-	Board * board = new Board();
-
-	//Initialize BLACK Pawns
-	for (int y = 0; y <= 7; y++)
-	{
-		board->Piece[7][y] = new Pawn();
-	}
-
-	/*Piece * whitePieces[16];
-		whitePieces[1] = new Pawn();
-		whitePieces[2] = new Pawn();
-		whitePieces[3] = new Pawn();
-		whitePieces[4] = new Pawn();
-		whitePieces[5] = new Pawn();
-		whitePieces[6] = new Pawn();
-		whitePieces[7] = new Pawn();
-		whitePieces[8] = new Pawn();
-		whitePieces[9] = new Rook();
-		whitePieces[10] = new Knight();
-		whitePieces[11] = new Bishop();
-		whitePieces[12] = new Queen();
-		whitePieces[13] = new King();
-		whitePieces[14] = new Bishop();
-		whitePieces[15] = new Knight();
-		whitePieces[16] = new Rook();
-
-	Piece * blackPieces[16];
-	blackPieces[1] = new Pawn();
-	blackPieces[2] = new Pawn();
-	blackPieces[3] = new Pawn();
-	blackPieces[4] = new Pawn();
-	blackPieces[5] = new Pawn();
-	blackPieces[6] = new Pawn();
-	blackPieces[7] = new Pawn();
-	blackPieces[8] = new Pawn();
-	blackPieces[9] = new Rook();
-	blackPieces[10] = new Knight();
-	blackPieces[11] = new Bishop();
-	blackPieces[12] = new Queen();
-	blackPieces[13] = new King();
-	blackPieces[14] = new Bishop();
-	blackPieces[15] = new Knight();
-	blackPieces[16] = new Rook();*/
-
-
-
 }
 void drawBoard()
 {
-	std::cout << board->getTurn(); //OBJECTS NOT BEING CREATED GLOBALLY??
+	//std::cout << board->getTurn(); //OBJECTS NOT BEING CREATED GLOBALLY??
 }
