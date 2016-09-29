@@ -5,7 +5,7 @@ class Board
 {
 public:
 
-	Board *Piece[8][8];
+	Board * Piece[8][8];
 	enum Turn { WHITE, BLACK };
 	Board::Turn turn;
 
@@ -28,6 +28,7 @@ inline std::string Board::getTurn()
 	}
 	else
 	{
+		//For debugging purposes
 		return "ERROR WHO'S TURN?";
 	}
 }

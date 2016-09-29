@@ -15,6 +15,7 @@
 #include <string>
 
 enum GameStatus { NONE, INPROGRESS, END };
+GameStatus gameStatus = NONE;
 
 void Menu(GameStatus& gameStatus);
 void createObjects();
@@ -25,7 +26,7 @@ int main()
 {
 	using namespace std;
 
-	GameStatus gameStatus = NONE;
+	
 
 	cout << "\t\t-----WELCOME TO CHESS-----" << endl << endl;
 
@@ -91,8 +92,8 @@ void Menu(GameStatus& gameStatus)
 		cout << "M - Move Piece"
 			<< endl
 			<< "E - End Game"
-			<< endl
-			<< board->getTurn(); //OBJECTS NOT BEING CREATED GLOBALLY??
+			<< endl;
+			
 	}
 }
 void createObjects()
@@ -100,7 +101,13 @@ void createObjects()
 
 	Board * board = new Board();
 
-	Piece * whitePieces[16];
+	//Initialize BLACK Pawns
+	for (int y = 0; y <= 7; y++)
+	{
+		board->Piece[7][y] = new Pawn();
+	}
+
+	/*Piece * whitePieces[16];
 		whitePieces[1] = new Pawn();
 		whitePieces[2] = new Pawn();
 		whitePieces[3] = new Pawn();
@@ -134,12 +141,12 @@ void createObjects()
 	blackPieces[13] = new King();
 	blackPieces[14] = new Bishop();
 	blackPieces[15] = new Knight();
-	blackPieces[16] = new Rook();
+	blackPieces[16] = new Rook();*/
 
 
 
 }
 void drawBoard()
 {
-
+	std::cout << board->getTurn(); //OBJECTS NOT BEING CREATED GLOBALLY??
 }
