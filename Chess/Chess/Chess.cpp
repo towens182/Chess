@@ -22,26 +22,24 @@ void Menu(GameStatus& gameStatus);
 void drawBoard();
 
 
+
 int main()
 {
 	using namespace std;
+
+	Board * gameBoard = new Board();
 
 	//for debugging purposes
 	int x;
 	
 
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
-
+	
 	do {
 
 		Menu(gameStatus);
-
-		if (gameStatus == NONE)
-		{
-			cout << "GAME START";
-			Board * board = new Board();
-			gameStatus = INPROGRESS;
-		}
+		drawBoard();
+	
 		//For debugging purposes
 		cin >> x;
 	} while (gameStatus != END);
@@ -49,7 +47,8 @@ int main()
 
 
 
-	delete board;
+	delete gameBoard;
+	
 
     return 0;
 }
@@ -73,12 +72,12 @@ void Menu(GameStatus& gameStatus)
 
 			if (command == 'S' || command == 's')
 			{
+				gameStatus = INPROGRESS;
 				system("CLS");
 				cout << "\t\t*****STARTING NEW GAME OF CHESS*****"
 					 << endl
 					 << "\t\t\t***WHITE BEGINS***"
 					 << endl;
-				
 			}
 			//If user tries to enter a command before starting a game
 			//tell them and retry menu
@@ -116,5 +115,23 @@ void Menu(GameStatus& gameStatus)
 }
 void drawBoard()
 {
+	using namespace std;
+	system("CLS");
+	cout << "\t\t*****"
+		 << gameBoard.turn
+	for (int x = 7; x >= 0; x--)
+	{
+		cout << x << "|" << endl;
+	}
+	cout << "\t";
+	for(int y = 0; y < 8; y++)
+	{
+		cout << "| " << y << " |";
+	}
 	//std::cout << board->getTurn(); //OBJECTS NOT BEING CREATED GLOBALLY??
+}
+
+void createPieces()
+{
+	//gameBoard->Piece[7][y] = new Pawn();
 }

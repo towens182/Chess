@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 class Board
 {
@@ -36,20 +37,12 @@ inline std::string Board::getTurn()
 Board::Board()
 {
 	this->turn = WHITE;
-	std::cout << "CREATED OBJECTS";
-
-
-
-
-
-
-
-
+	std::cout << "CREATED BOARD";
 
 	//Initialize BLACK Pawns
 	for (int y = 0; y <= 7; y++)
 	{
-		//board->Piece[7][y] = new Pawn();
+		//this->Piece[7][y] = new Pawn();
 	}
 
 	/*Piece * whitePieces[16];
