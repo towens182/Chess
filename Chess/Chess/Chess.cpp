@@ -32,7 +32,6 @@ int main()
 
 	//for debugging purposes
 	int x;
-	
 
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
 	
@@ -44,7 +43,7 @@ int main()
 		{
 			createPieces(gameBoard);
 		}
-	
+		
 		//For debugging purposes
 		cin >> x;
 	} while (gameStatus != END);
@@ -140,5 +139,5 @@ void drawBoard(Board *gameBoard)
 
 void createPieces(Board *gameBoard)
 {
-	//???
+	*gameBoard->piece[0][0] = new Rook();
 }

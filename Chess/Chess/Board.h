@@ -6,10 +6,9 @@ class Board
 {
 public:
 
-	Board * Piece[8][8];
+	Piece * piece[8][8];
 	std::string getTurn();
 	void newTurn();
-	
 
 	Board();
 	~Board();
@@ -51,8 +50,11 @@ inline void Board::newTurn()
 Board::Board()
 {
 	this->turn = WHITE;
+	//Debug
 	std::cout << "CREATED BOARD";
 
+
+	
 	//Initialize BLACK Pawns
 	
 
