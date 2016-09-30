@@ -7,14 +7,16 @@ class Board
 public:
 
 	Board * Piece[8][8];
-	enum Turn { WHITE, BLACK };
-	Board::Turn turn;
-
 	std::string getTurn();
+	void newTurn();
+	
 
 	Board();
 	~Board();
-	
+private:
+	enum Turn { WHITE, BLACK };
+	Board::Turn turn;
+
 };
 
 inline std::string Board::getTurn()
@@ -34,16 +36,25 @@ inline std::string Board::getTurn()
 	}
 }
 
+inline void Board::newTurn()
+{
+	if (this->turn == WHITE)
+	{
+		this->turn = BLACK;
+	}
+	else
+	{
+		this->turn = WHITE;
+	}
+}
+
 Board::Board()
 {
 	this->turn = WHITE;
 	std::cout << "CREATED BOARD";
 
 	//Initialize BLACK Pawns
-	for (int y = 0; y <= 7; y++)
-	{
-		//this->Piece[7][y] = new Pawn();
-	}
+	
 
 	/*Piece * whitePieces[16];
 	whitePieces[1] = new Pawn();

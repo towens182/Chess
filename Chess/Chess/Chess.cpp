@@ -19,7 +19,8 @@ enum GameStatus { NONE, INPROGRESS, END };
 GameStatus gameStatus = NONE;
 
 void Menu(GameStatus& gameStatus);
-void drawBoard();
+void drawBoard(Board *gameBoard);
+void createPieces(Board *gameBoard);
 
 
 
@@ -38,7 +39,11 @@ int main()
 	do {
 
 		Menu(gameStatus);
-		drawBoard();
+		drawBoard(gameBoard);
+		if (gameStatus == NONE)
+		{
+			createPieces(gameBoard);
+		}
 	
 		//For debugging purposes
 		cin >> x;
@@ -84,9 +89,7 @@ void Menu(GameStatus& gameStatus)
 			else if (command == 'E' || command == 'e' || command == 'M' || command == 'm')
 			{
 				system("CLS");
-				cout << "\t\t*****PLEASE START THE GAME FIRST*****"
-					 << endl
-					 << endl;
+				cout << "\t\t*****PLEASE START THE GAME FIRST*****" << endl << endl;
 
 				Menu(gameStatus);
 			}
@@ -107,31 +110,35 @@ void Menu(GameStatus& gameStatus)
 	else
 	{
 		cout << "M - Move Piece"
-			<< endl
-			<< "E - End Game"
-			<< endl;
+			 << endl
+			 << "E - End Game"
+			 << endl;
 			//Function for move
 	}
 }
-void drawBoard()
+void drawBoard(Board *gameBoard)
 {
 	using namespace std;
 	system("CLS");
 	cout << "\t\t*****"
-		 << gameBoard.turn
+		<< gameBoard->getTurn()
+		<< "'S TURN*****"
+		<< endl 
+		<< endl;
 	for (int x = 7; x >= 0; x--)
 	{
-		cout << x << "|" << endl;
+		cout << x << "|" 
+			 << endl 
+			 << endl;
 	}
-	cout << "\t";
+	cout << " ";
 	for(int y = 0; y < 8; y++)
 	{
 		cout << "| " << y << " |";
 	}
-	//std::cout << board->getTurn(); //OBJECTS NOT BEING CREATED GLOBALLY??
 }
 
-void createPieces()
+void createPieces(Board *gameBoard)
 {
-	//gameBoard->Piece[7][y] = new Pawn();
+	//???
 }
