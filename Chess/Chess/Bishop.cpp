@@ -19,5 +19,6 @@ bool Bishop::Move()
 
 std::string Bishop::getPieceName()
 {
+	//if (this->player ==white)
 	return "Bishop";
 }

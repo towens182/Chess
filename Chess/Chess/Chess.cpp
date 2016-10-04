@@ -18,10 +18,10 @@
 enum GameStatus { NONE, INPROGRESS, END };
 GameStatus gameStatus = NONE;
 
-void Menu(GameStatus& gameStatus);
+void Menu(GameStatus& gameStatus, Board *gameBoard);
 void drawBoard(Board *gameBoard);
 void createPieces(Board *gameBoard);
-
+void Move(Board *gameBoard);
 
 
 int main()
@@ -34,10 +34,10 @@ int main()
 	int x;
 
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
-	
+	Menu(gameStatus, gameBoard);
 	do {
 
-		Menu(gameStatus);
+		Move(gameBoard);
 		drawBoard(gameBoard);
 		if (gameStatus == NONE)
 		{
@@ -57,14 +57,11 @@ int main()
     return 0;
 }
 
-void Menu(GameStatus& gameStatus)
+void Menu(GameStatus& gameStatus, Board *gameBoard)
 {
 	using namespace std;
 
 	char command;
-
-	if (gameStatus == NONE)
-	{
 		cout
 		     << "S - Start Game" << endl
 			 << "M - Move Piece" << endl
@@ -90,7 +87,7 @@ void Menu(GameStatus& gameStatus)
 				system("CLS");
 				cout << "\t\t*****PLEASE START THE GAME FIRST*****" << endl << endl;
 
-				Menu(gameStatus);
+				Menu(gameStatus, gameBoard);
 			}
 			else
 			{
@@ -103,17 +100,8 @@ void Menu(GameStatus& gameStatus)
 			cout << message 
 				 << endl 
 				 << endl;
-			Menu(gameStatus);
+			Menu(gameStatus, gameBoard);
 		}
-	}
-	else
-	{
-		cout << "M - Move Piece"
-			 << endl
-			 << "E - End Game"
-			 << endl;
-			//Function for move
-	}
 }
 void drawBoard(Board *gameBoard)
 {
@@ -139,5 +127,26 @@ void drawBoard(Board *gameBoard)
 
 void createPieces(Board *gameBoard)
 {
-	*gameBoard->piece[0][0] = new Rook();
+	
+}
+
+void Move(Board * gameBoard)
+{
+	using namespace std;
+	char command;
+	cout << "M - Move Piece"
+		 << endl
+		 << "E - End Game"
+		 << endl
+		 << gameBoard->getTurn()
+		 << ": ";
+	cin >> command;
+	if (command == 'M' || command == 'm')
+	{
+		
+	}
+	else if (command == 'E' || command == 'e')
+	{
+		gameStatus = END;
+	}
 }
