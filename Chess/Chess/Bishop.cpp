@@ -6,6 +6,20 @@ Bishop::Bishop()
 {
 }
 
+Bishop::Bishop(char color)
+{
+	if (color == 'W')
+	{
+		this->player = white;
+		this->name = "WB";
+	}
+	else
+	{
+		this->player = black;
+		this->name = "BB";
+	}
+}
+
 
 Bishop::~Bishop()
 {
@@ -19,6 +33,5 @@ bool Bishop::Move()
 
 std::string Bishop::getPieceName()
 {
-	//if (this->player ==white)
-	return "Bishop";
+	return this->name;
 }

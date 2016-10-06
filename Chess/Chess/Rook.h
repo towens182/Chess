@@ -5,6 +5,7 @@ class Rook :
 {
 public:
 	Rook();
+	Rook(char color);
 	~Rook();
 
 	bool Move();

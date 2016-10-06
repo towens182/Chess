@@ -5,6 +5,7 @@ class Knight :
 {
 public:
 	Knight();
+	Knight(char color);
 	~Knight();
 
 	bool Move();

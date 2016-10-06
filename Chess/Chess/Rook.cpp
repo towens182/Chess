@@ -1,9 +1,21 @@
 #include "Rook.h"
 
-
-
 Rook::Rook()
 {
+}
+
+Rook::Rook(char color)
+{
+	if (color == 'W')
+	{
+		this->player = white;
+		this->name = "WR";
+	}
+	else
+	{
+		this->player = black;
+		this->name = "BR";
+	}
 }
 
 
@@ -19,5 +31,5 @@ bool Rook::Move()
 
 std::string Rook::getPieceName()
 {
-	return "Rook";
+	return this->name;
 }

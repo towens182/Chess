@@ -9,18 +9,15 @@ public:
 
 	Piece();
 	~Piece();
-	
-	virtual bool Move() =0;
-	virtual std::string getPieceName() =0;
-
-
-private:
 	enum player { white, black };
 	player player;
 	std::string name;
-	int row, col;
-	
 
+	virtual bool Move() =0;
+	//virtual std::string getPieceName() =0;
+	std::string getPieceName() { return "BP";};
+
+	
 };
 
 

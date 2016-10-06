@@ -112,22 +112,31 @@ void drawBoard(Board *gameBoard)
 		<< "'S TURN*****"
 		<< endl 
 		<< endl;
+	
 	for (int x = 7; x >= 0; x--)
 	{
-		cout << x << "|" 
-			 << endl 
+		cout << x << "|  ";
+		for (int y = 0; y < 8; y++)
+		{
+			cout << gameBoard->pieces[x][y]->getPieceName()
+				<< "   ";
+		}
+		cout << endl
 			 << endl;
 	}
-	cout << " ";
 	for(int y = 0; y < 8; y++)
 	{
-		cout << "| " << y << " |";
+		cout << "  | " << y << " |";
 	}
 }
 
 void createPieces(Board *gameBoard)
 {
-	
+
+	for (int y = 0; y < 8; y++)
+	{
+		gameBoard->pieces[0][y] = new Pawn('W');
+	}
 }
 
 void Move(Board * gameBoard)

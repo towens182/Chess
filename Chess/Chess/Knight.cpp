@@ -6,6 +6,20 @@ Knight::Knight()
 {
 }
 
+Knight::Knight(char color)
+{
+	if (color == 'W')
+	{
+		this->player = white;
+		this->name = "WN";
+	}
+	else
+	{
+		this->player = black;
+		this->name = "BN";
+	}
+}
+
 
 Knight::~Knight()
 {
@@ -18,5 +32,5 @@ bool Knight::Move()
 
 std::string Knight::getPieceName()
 {
-	return "Knight";
+	return this->name;
 }

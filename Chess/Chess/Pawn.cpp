@@ -6,6 +6,20 @@ Pawn::Pawn()
 {
 }
 
+Pawn::Pawn(char color)
+{
+	if (color == 'W')
+	{
+		this->player = white;
+		this->name = "WP";
+	}
+	else
+	{
+		this->player = black;
+		this->name = "BP";
+	}
+}
+
 
 Pawn::~Pawn()
 {
@@ -19,5 +33,5 @@ bool Pawn::Move()
 
 std::string Pawn::getPieceName()
 {
-	return "Pawn";
+	return this->name;
 }

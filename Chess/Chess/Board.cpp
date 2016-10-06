@@ -5,13 +5,6 @@ Board::Board()
 	this->turn = WHITE;
 	//Debug
 	std::cout << "CREATED BOARD";
-
-	/*for (int y = 0; y < 8; y++)
-	{
-	pieces[0][y] = new Pawn();
-	}
-	*/
-
 }
 
 Board::~Board()

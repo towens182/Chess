@@ -5,6 +5,7 @@ class Bishop :
 {
 public:
 	Bishop();
+	Bishop(char color);
 	~Bishop();
 
 	

@@ -5,9 +5,9 @@ class Pawn :
 {
 public:
 	Pawn();
+	Pawn(char color);
 	~Pawn();
 
-	
 	bool Move();
 	std::string getPieceName();
 };
