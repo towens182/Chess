@@ -30,8 +30,3 @@ bool Pawn::Move()
 {
 	return false;
 }
-
-//std::string Pawn::getPieceName()
-//{
-//	return name;
-//}
