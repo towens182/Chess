@@ -12,6 +12,7 @@ public:
 
 	Board();
 	~Board();
+
 private:
 	enum Turn { WHITE, BLACK };
 	Board::Turn turn;

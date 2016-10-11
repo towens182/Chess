@@ -9,6 +9,7 @@ Board::Board()
 
 Board::~Board()
 {
+	delete[] pieces;
 }
 std::string Board::getTurn()
 {

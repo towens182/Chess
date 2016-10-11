@@ -9,15 +9,17 @@ public:
 
 	Piece();
 	~Piece();
+
 	enum player { white, black };
 	player player;
-	std::string name;
+
 
 	virtual bool Move() =0;
-	//virtual std::string getPieceName() =0;
-	std::string getPieceName() { return "BP";};
+	std::string getPieceName();
+	//std::string getPieceName() { return "BP";};
 
-	
+protected:
+	std::string name;
 };
 
 

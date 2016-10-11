@@ -36,14 +36,8 @@ int main()
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
 	Menu(gameStatus, gameBoard);
 	do {
-
 		Move(gameBoard);
 		drawBoard(gameBoard);
-		if (gameStatus == NONE)
-		{
-			createPieces(gameBoard);
-		}
-		
 		//For debugging purposes
 		cin >> x;
 	} while (gameStatus != END);
@@ -73,6 +67,7 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 
 			if (command == 'S' || command == 's')
 			{
+				createPieces(gameBoard);
 				gameStatus = INPROGRESS;
 				system("CLS");
 				cout << "\t\t*****STARTING NEW GAME OF CHESS*****"
@@ -118,21 +113,33 @@ void drawBoard(Board *gameBoard)
 		cout << x << "|  ";
 		for (int y = 0; y < 8; y++)
 		{
-			cout << gameBoard->pieces[x][y]->getPieceName()
-				<< "   ";
+			if (gameBoard->pieces[x][y] == NULL)
+			{
+				cout << "  ";
+			}
+			else
+			{
+				cout << gameBoard->pieces[0][y]->getPieceName()
+					<< "   ";
+			}
 		}
 		cout << endl
 			 << endl;
 	}
+	cout << " ";
 	for(int y = 0; y < 8; y++)
 	{
-		cout << "  | " << y << " |";
+		cout << "| " << y << " ";
 	}
 }
 
 void createPieces(Board *gameBoard)
 {
-
+	for(int x = 0; x < 8; x++)
+		for (int y = 0; y < 8; y++)
+		{
+			gameBoard->pieces[x][y] = NULL;
+		}
 	for (int y = 0; y < 8; y++)
 	{
 		gameBoard->pieces[0][y] = new Pawn('W');
