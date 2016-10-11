@@ -16,7 +16,7 @@ public:
 
 	virtual bool Move() =0;
 	std::string getPieceName();
-	//std::string getPieceName() { return "BP";};
+
 
 protected:
 	std::string name;

@@ -110,7 +110,7 @@ void drawBoard(Board *gameBoard)
 	
 	for (int x = 7; x >= 0; x--)
 	{
-		cout << x << "|  ";
+		cout << x << "| ";
 		for (int y = 0; y < 8; y++)
 		{
 			if (gameBoard->pieces[x][y] == NULL)
@@ -119,8 +119,8 @@ void drawBoard(Board *gameBoard)
 			}
 			else
 			{
-				cout << gameBoard->pieces[0][y]->getPieceName()
-					<< "   ";
+				cout << gameBoard->pieces[x][y]->getPieceName()
+					 << "  ";
 			}
 		}
 		cout << endl
@@ -131,19 +131,49 @@ void drawBoard(Board *gameBoard)
 	{
 		cout << "| " << y << " ";
 	}
+	cout << endl;
 }
 
 void createPieces(Board *gameBoard)
 {
+	//Initialize all array locations to NULL
 	for(int x = 0; x < 8; x++)
 		for (int y = 0; y < 8; y++)
 		{
 			gameBoard->pieces[x][y] = NULL;
 		}
+	//Create White Pieces
+	gameBoard->pieces[0][0] = new Rook('W');
+	gameBoard->pieces[0][1] = new Knight('W');
+	gameBoard->pieces[0][2] = new Bishop('W');
+	gameBoard->pieces[0][3] = new Queen('W');
+	gameBoard->pieces[0][4] = new King('W');
+	gameBoard->pieces[0][5] = new Bishop('W');
+	gameBoard->pieces[0][6] = new Knight('W');
+	gameBoard->pieces[0][7] = new Rook('W');
+	//Create White Pawns
 	for (int y = 0; y < 8; y++)
 	{
-		gameBoard->pieces[0][y] = new Pawn('W');
+		gameBoard->pieces[1][y] = new Pawn('W');
 	}
+
+	//Create Black Pieces
+	gameBoard->pieces[7][0] = new Rook('B');
+	gameBoard->pieces[7][1] = new Knight('B');
+	gameBoard->pieces[7][2] = new Bishop('B');
+	gameBoard->pieces[7][3] = new Queen('B');
+	gameBoard->pieces[7][4] = new King('B');
+	gameBoard->pieces[7][5] = new Bishop('B');
+	gameBoard->pieces[7][6] = new Knight('B');
+	gameBoard->pieces[7][7] = new Rook('B');
+	//Create Black Pawns
+	for (int y = 0; y < 8; y++)
+	{
+		gameBoard->pieces[6][y] = new Pawn('B');
+	}
+
+
+
 }
 
 void Move(Board * gameBoard)
