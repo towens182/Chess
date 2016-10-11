@@ -10,6 +10,5 @@ public:
 
 	
 	bool Move();
-	std::string getPieceName();
 };
 

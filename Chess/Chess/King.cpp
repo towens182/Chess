@@ -29,8 +29,3 @@ bool King::Move()
 {
 	return false;
 }
-
-std::string King::getPieceName()
-{
-	return this->name;
-}

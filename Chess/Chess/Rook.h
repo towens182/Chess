@@ -9,6 +9,5 @@ public:
 	~Rook();
 
 	bool Move();
-	std::string getPieceName();
 };
 

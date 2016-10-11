@@ -9,6 +9,5 @@ public:
 	~King();
 
 	bool Move();
-	std::string getPieceName();
 };
 

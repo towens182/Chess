@@ -28,8 +28,3 @@ bool Rook::Move()
 {
 	return false;
 }
-
-std::string Rook::getPieceName()
-{
-	return this->name;
-}

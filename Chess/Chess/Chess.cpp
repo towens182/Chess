@@ -30,19 +30,13 @@ int main()
 
 	Board * gameBoard = new Board();
 
-	//for debugging purposes
-	int x;
-
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
 	Menu(gameStatus, gameBoard);
 	do {
-		Move(gameBoard);
 		drawBoard(gameBoard);
-		//For debugging purposes
-		cin >> x;
+		Move(gameBoard);
+		
 	} while (gameStatus != END);
-
-
 
 
 	delete gameBoard;
@@ -142,6 +136,7 @@ void createPieces(Board *gameBoard)
 		{
 			gameBoard->pieces[x][y] = NULL;
 		}
+
 	//Create White Pieces
 	gameBoard->pieces[0][0] = new Rook('W');
 	gameBoard->pieces[0][1] = new Knight('W');
@@ -151,6 +146,7 @@ void createPieces(Board *gameBoard)
 	gameBoard->pieces[0][5] = new Bishop('W');
 	gameBoard->pieces[0][6] = new Knight('W');
 	gameBoard->pieces[0][7] = new Rook('W');
+	
 	//Create White Pawns
 	for (int y = 0; y < 8; y++)
 	{
@@ -166,21 +162,20 @@ void createPieces(Board *gameBoard)
 	gameBoard->pieces[7][5] = new Bishop('B');
 	gameBoard->pieces[7][6] = new Knight('B');
 	gameBoard->pieces[7][7] = new Rook('B');
+	
 	//Create Black Pawns
 	for (int y = 0; y < 8; y++)
 	{
 		gameBoard->pieces[6][y] = new Pawn('B');
 	}
-
-
-
 }
 
 void Move(Board * gameBoard)
 {
 	using namespace std;
 	char command;
-	cout << "M - Move Piece"
+	cout << endl
+		 << "M - Move Piece"
 		 << endl
 		 << "E - End Game"
 		 << endl

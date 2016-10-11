@@ -29,8 +29,3 @@ bool Knight::Move()
 {
 	return false;
 }
-
-std::string Knight::getPieceName()
-{
-	return this->name;
-}

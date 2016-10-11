@@ -29,8 +29,3 @@ bool Queen::Move()
 {
 	return false;
 }
-
-std::string Queen::getPieceName()
-{
-	return this->name;
-}

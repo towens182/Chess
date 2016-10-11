@@ -20,7 +20,6 @@ Bishop::Bishop(char color)
 	}
 }
 
-
 Bishop::~Bishop()
 {
 }
@@ -31,7 +30,3 @@ bool Bishop::Move()
 	return false;
 }
 
-std::string Bishop::getPieceName()
-{
-	return this->name;
-}

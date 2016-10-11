@@ -9,6 +9,5 @@ public:
 	~Knight();
 
 	bool Move();
-	std::string getPieceName();
 };
 
