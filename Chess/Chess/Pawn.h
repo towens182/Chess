@@ -8,6 +8,6 @@ public:
 	Pawn(char color);
 	~Pawn();
 
-	bool Move();
+	bool Move(gameBoard, x, y, newX, newY);
 };
 

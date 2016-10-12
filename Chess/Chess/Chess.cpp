@@ -39,8 +39,15 @@ int main()
 	} while (gameStatus != END);
 
 
+	//Cleanup (Move to own function?)
+
 	delete gameBoard;
-	
+
+	for (int x = 0; x < 8; x++)
+		for (int y = 0; y < 8; y++)
+		{
+			gameBoard->pieces[x][y] = NULL;
+		}
 
     return 0;
 }
@@ -109,12 +116,12 @@ void drawBoard(Board *gameBoard)
 		{
 			if (gameBoard->pieces[x][y] == NULL)
 			{
-				cout << "  ";
+				cout << "  |";
 			}
 			else
 			{
 				cout << gameBoard->pieces[x][y]->getPieceName()
-					 << "  ";
+					 << "  |";
 			}
 		}
 		cout << endl
@@ -173,9 +180,10 @@ void createPieces(Board *gameBoard)
 void Move(Board * gameBoard)
 {
 	using namespace std;
-	char command;
+	char command, piece;
+	int oldX, oldY, newX, newY;
 	cout << endl
-		 << "M - Move Piece"
+		 << "M - Move Piece---(Enter"
 		 << endl
 		 << "E - End Game"
 		 << endl
@@ -184,7 +192,8 @@ void Move(Board * gameBoard)
 	cin >> command;
 	if (command == 'M' || command == 'm')
 	{
-		
+		cin >> piece, oldX, oldY, newX, newY;
+	
 	}
 	else if (command == 'E' || command == 'e')
 	{
