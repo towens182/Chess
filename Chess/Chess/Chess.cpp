@@ -21,7 +21,7 @@ GameStatus gameStatus = NONE;
 void Menu(GameStatus& gameStatus, Board *gameBoard);
 void drawBoard(Board *gameBoard);
 void createPieces(Board *gameBoard);
-void Move(Board *gameBoard);
+void Move(GameStatus& gameStatus, Board *gameBoard);
 
 
 int main()
@@ -34,11 +34,12 @@ int main()
 	Menu(gameStatus, gameBoard);
 	do {
 		drawBoard(gameBoard);
-		Move(gameBoard);
+		Move(gameStatus, gameBoard);
 		
 	} while (gameStatus != END);
 
-
+	system("CLS");
+	cout << "*****GAME OVER*****";
 	//Cleanup (Move to own function?)
 
 	delete gameBoard;
@@ -106,7 +107,7 @@ void drawBoard(Board *gameBoard)
 	cout << "\t\t*****"
 		<< gameBoard->getTurn()
 		<< "'S TURN*****"
-		<< endl 
+		<< endl
 		<< endl;
 	cout << "  -----------------------------------------"
 		 <<endl;
@@ -115,6 +116,7 @@ void drawBoard(Board *gameBoard)
 		cout << x << " | ";
 		for (int y = 0; y < 8; y++)
 		{
+			//Just print spaces for square if there is no piece occupying it
 			if (gameBoard->pieces[x][y] == NULL)
 			{
 				cout << "   | ";
@@ -180,7 +182,7 @@ void createPieces(Board *gameBoard)
 	}
 }
 
-void Move(Board * gameBoard)
+void Move(GameStatus& gameStatus, Board * gameBoard)
 {
 	using namespace std;
 
@@ -198,12 +200,19 @@ void Move(Board * gameBoard)
 	cin >> command;
 	if (command == 'M' || command == 'm')
 	{
-		cout << "PIECE: ";
+		system("CLS");
+		drawBoard(gameBoard);
+		cout << endl
+			 << "\t" 
+			 << gameBoard->getTurn()
+		 	 << endl
+		     << "Piece: ";
 		cin >> piece;
-		cout << " OLD (x,y)-> NEW (x,y): ";
+		cout << "Current (x,y) -> New (x,y): ";
 		cin >> oldX, oldY, newX, newY;
+		gameBoard->move(piece, oldX, oldY, newX, newY);
 	}
-	else if (command == 'E' || command == 'e')
+	else if(command == 'E' || command == 'e')
 	{
 		gameStatus = END;
 	}

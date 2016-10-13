@@ -3,13 +3,22 @@
 Board::Board()
 {
 	this->turn = WHITE;
-	//Debug
-	std::cout << "CREATED BOARD";
 }
 
 Board::~Board()
 {
 	delete[] *pieces;
+}
+void Board::move(std::string piece, int x, int y, int newX, int newY)
+{
+	if (this->turn == WHITE)
+	{
+		this->turn = BLACK;
+	}
+	else if (this->turn == BLACK)
+	{
+		this->turn = WHITE;
+	}
 }
 std::string Board::getTurn()
 {
