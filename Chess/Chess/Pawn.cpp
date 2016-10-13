@@ -10,12 +10,12 @@ Pawn::Pawn(char color)
 {
 	if (color == 'W')
 	{
-		player = white;
+		player = WHITE;
 		name = "WP";
 	}
 	else
 	{
-		player = black;
+		player = BLACK;
 		name = "BP";
 	}
 }

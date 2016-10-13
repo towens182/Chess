@@ -209,7 +209,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		     << "Piece: ";
 		cin >> piece;
 		cout << "Current (x,y) -> New (x,y): ";
-		cin >> oldX, oldY, newX, newY;
+		cin >> oldX >> oldY >> newX >> newY;
 		gameBoard->move(piece, oldX, oldY, newX, newY);
 	}
 	else if(command == 'E' || command == 'e')

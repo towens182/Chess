@@ -12,7 +12,10 @@ public:
 
 	Board();
 	~Board();
-	void move(std::string piece, int x, int y, int newX, int newY);
+	void move(std::string piece, int oldX, int oldY, int newX, int newY);
+
+	bool validPiece(std::string piece, int oldX, int oldY);
+	bool validDestination(int oldX, int oldY, int newX, int newY);
 
 private:
 	enum Turn { WHITE, BLACK };

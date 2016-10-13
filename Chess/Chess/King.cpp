@@ -10,12 +10,12 @@ King::King(char color)
 {
 	if (color == 'W')
 	{
-		this->player = white;
+		this->player = WHITE;
 		this->name = "WK";
 	}
 	else
 	{
-		this->player = black;
+		this->player = BLACK;
 		this->name = "BK";
 	}
 }

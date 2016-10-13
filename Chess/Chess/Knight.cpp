@@ -10,12 +10,12 @@ Knight::Knight(char color)
 {
 	if (color == 'W')
 	{
-		this->player = white;
+		this->player = WHITE;
 		this->name = "WN";
 	}
 	else
 	{
-		this->player = black;
+		this->player = BLACK;
 		this->name = "BN";
 	}
 }

@@ -7,13 +7,13 @@ public:
 	Piece();
 	~Piece();
 
-	enum player { white, black };
+	enum player { WHITE, BLACK };
 	player player;
 
 
 	virtual bool Move() =0;
 	std::string getPieceName();
-	bool isWhite();
+	//bool isWhite();
 
 protected:
 	std::string name;

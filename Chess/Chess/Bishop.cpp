@@ -10,12 +10,12 @@ Bishop::Bishop(char color)
 {
 	if (color == 'W')
 	{
-		this->player = white;
+		this->player = WHITE;
 		this->name = "WB";
 	}
 	else
 	{
-		this->player = black;
+		this->player = BLACK;
 		this->name = "BB";
 	}
 }

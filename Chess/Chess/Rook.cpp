@@ -8,12 +8,12 @@ Rook::Rook(char color)
 {
 	if (color == 'W')
 	{
-		this->player = white;
+		this->player = WHITE;
 		this->name = "WR";
 	}
 	else
 	{
-		this->player = black;
+		this->player = BLACK;
 		this->name = "BR";
 	}
 }
