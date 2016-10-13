@@ -108,31 +108,34 @@ void drawBoard(Board *gameBoard)
 		<< "'S TURN*****"
 		<< endl 
 		<< endl;
-	
+	cout << "  -----------------------------------------"
+		 <<endl;
 	for (int x = 7; x >= 0; x--)
 	{
-		cout << x << "| ";
+		cout << x << " | ";
 		for (int y = 0; y < 8; y++)
 		{
 			if (gameBoard->pieces[x][y] == NULL)
 			{
-				cout << "  |";
+				cout << "   | ";
 			}
 			else
 			{
 				cout << gameBoard->pieces[x][y]->getPieceName()
-					 << "  |";
+					 << " | ";
 			}
 		}
 		cout << endl
+			 << "  -----------------------------------------" 
 			 << endl;
 	}
 	cout << " ";
 	for(int y = 0; y < 8; y++)
 	{
-		cout << "| " << y << " ";
+		cout << "    " << y;
 	}
-	cout << endl;
+	cout << "  "
+		 << endl;
 }
 
 void createPieces(Board *gameBoard)
@@ -180,10 +183,13 @@ void createPieces(Board *gameBoard)
 void Move(Board * gameBoard)
 {
 	using namespace std;
-	char command, piece;
+
+	char command;
+	string piece;
 	int oldX, oldY, newX, newY;
+	
 	cout << endl
-		 << "M - Move Piece---(Enter"
+		 << "M - Move Piece"
 		 << endl
 		 << "E - End Game"
 		 << endl
@@ -192,8 +198,10 @@ void Move(Board * gameBoard)
 	cin >> command;
 	if (command == 'M' || command == 'm')
 	{
-		cin >> piece, oldX, oldY, newX, newY;
-	
+		cout << "PIECE: ";
+		cin >> piece;
+		cout << " OLD (x,y)-> NEW (x,y): ";
+		cin >> oldX, oldY, newX, newY;
 	}
 	else if (command == 'E' || command == 'e')
 	{

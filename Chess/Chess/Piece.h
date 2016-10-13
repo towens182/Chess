@@ -4,9 +4,6 @@ class Piece
 {
 public:
 
-	//Identifies which player a piece belongs to
-	
-
 	Piece();
 	~Piece();
 
@@ -16,7 +13,7 @@ public:
 
 	virtual bool Move() =0;
 	std::string getPieceName();
-
+	bool isWhite();
 
 protected:
 	std::string name;

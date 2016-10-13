@@ -25,14 +25,9 @@ Pawn::~Pawn()
 {
 }
 
-bool Pawn::Move(gameBoard, x, y, newX, newY)
+bool Pawn::Move(/*gameBoard, x, y, newX, newY*/)
 {
-	if()
+	
 	return true;
 }
 
-
-bool Pawn::Move()
-{
-	return false;
-}

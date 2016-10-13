@@ -12,6 +12,7 @@ public:
 
 	Board();
 	~Board();
+	void move();
 
 private:
 	enum Turn { WHITE, BLACK };
