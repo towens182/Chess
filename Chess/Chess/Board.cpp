@@ -13,9 +13,10 @@ void Board::move(std::string piece, int oldX, int oldY, int newX, int newY)
 {
 	if (validPiece(piece, oldX, oldY) && validDestination(oldX, oldY, newX, newY))
 	{
-		pieces[newX][newY] = NULL;
-		pieces[newX][newY] = pieces[oldX][oldY];
-		pieces[oldX][oldY] = NULL;
+		delete pieces[newY][newX];
+		pieces[newY][newX] = NULL;
+		pieces[newY][newX] = pieces[oldY][oldX];
+		pieces[oldY][oldX] = NULL;
 		if (this->turn == WHITE)
 		{
 			this->turn = BLACK;
@@ -26,21 +27,18 @@ void Board::move(std::string piece, int oldX, int oldY, int newX, int newY)
 		}
 
 	}
-
-
-	
 }
 //Makes sure the piece chosen belongs to the right player
 //and in the chosen destination
 bool Board::validPiece(std::string piece, int oldX, int oldY)
 {
-	if ((piece == pieces[oldX][oldY]->getPieceName()) && (turn == pieces[oldX][oldY]->player))
+	if ((piece == pieces[oldY][oldX]->getPieceName()) && (turn == pieces[oldY][oldX]->player))
 	{
 		return true;
 	}
 	else
 	{
-		std::cout << "Not a Valid Piece";
+		
 		return false;
 	}
 }
@@ -50,7 +48,7 @@ bool Board::validDestination(int oldX, int oldY, int newX, int newY)
 {
 	if ((oldX < 8) && (oldY < 8) && (newX >= 0) && (newY >= 0))
 	{
-		if ((pieces[newX][newY] == NULL) || (pieces[oldX][oldY]->player != pieces[newX][newY]->player))
+		if ((pieces[newY][newX] == NULL) || (pieces[oldY][oldX]->player != pieces[newY][newX]->player))
 		{
 			return true;
 		}

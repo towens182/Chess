@@ -14,20 +14,22 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <algorithm>
 
 enum GameStatus { NONE, INPROGRESS, END };
-GameStatus gameStatus = NONE;
-
+enum Winner {NOBODY, WHITE, BLACK};
 void Menu(GameStatus& gameStatus, Board *gameBoard);
 void drawBoard(Board *gameBoard);
 void createPieces(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
-
+void cleanup(Board *gameBoard, Winner gameWinner);
 
 int main()
 {
 	using namespace std;
 
+	GameStatus gameStatus = NONE;
+	Winner gameWinner = NOBODY;
 	Board * gameBoard = new Board();
 
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
@@ -37,20 +39,9 @@ int main()
 		Move(gameStatus, gameBoard);
 		
 	} while (gameStatus != END);
-
-	system("CLS");
-	cout << "*****GAME OVER*****";
-	//Cleanup (Move to own function?)
-
-	delete gameBoard;
-
-	for (int x = 0; x < 8; x++)
-		for (int y = 0; y < 8; y++)
-		{
-			gameBoard->pieces[x][y] = NULL;
-		}
-
-    return 0;
+		
+	cleanup(gameBoard, gameWinner);
+	return 0;
 }
 
 void Menu(GameStatus& gameStatus, Board *gameBoard)
@@ -72,9 +63,9 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 				createPieces(gameBoard);
 				gameStatus = INPROGRESS;
 				system("CLS");
-				cout << "\t\t*****STARTING NEW GAME OF CHESS*****"
+				cout << "\t\t***** STARTING NEW GAME OF CHESS *****"
 					 << endl
-					 << "\t\t\t***WHITE BEGINS***"
+					 << "\t\t\t*** WHITE BEGINS ***"
 					 << endl;
 			}
 			//If user tries to enter a command before starting a game
@@ -82,13 +73,13 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 			else if (command == 'E' || command == 'e' || command == 'M' || command == 'm')
 			{
 				system("CLS");
-				cout << "\t\t*****PLEASE START THE GAME FIRST*****" << endl << endl;
+				cout << "\t\t***** PLEASE START THE GAME FIRST *****" << endl << endl;
 
 				Menu(gameStatus, gameBoard);
 			}
 			else
 			{
-				throw string("\t\t*****NOT A VALID INPUT!!*****");
+				throw string("\t\t***** NOT A VALID INPUT!! *****");
 			}
 		}
 		catch (string message)
@@ -109,11 +100,11 @@ void drawBoard(Board *gameBoard)
 		<< "'S TURN*****"
 		<< endl
 		<< endl;
-	cout << "  -----------------------------------------"
+	cout << "\t  -----------------------------------------"
 		 <<endl;
 	for (int x = 7; x >= 0; x--)
 	{
-		cout << x << " | ";
+		cout << "\t" << x << " | ";
 		for (int y = 0; y < 8; y++)
 		{
 			//Just print spaces for square if there is no piece occupying it
@@ -128,10 +119,10 @@ void drawBoard(Board *gameBoard)
 			}
 		}
 		cout << endl
-			 << "  -----------------------------------------" 
+			 << "\t  -----------------------------------------" 
 			 << endl;
 	}
-	cout << " ";
+	cout << "\t ";
 	for(int y = 0; y < 8; y++)
 	{
 		cout << "    " << y;
@@ -203,12 +194,10 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		system("CLS");
 		drawBoard(gameBoard);
 		cout << endl
-			 << "\t" 
-			 << gameBoard->getTurn()
-		 	 << endl
 		     << "Piece: ";
 		cin >> piece;
-		cout << "Current (x,y) -> New (x,y): ";
+		transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
+		cout << "Current (x,y -> New (x,y): ";
 		cin >> oldX >> oldY >> newX >> newY;
 		gameBoard->move(piece, oldX, oldY, newX, newY);
 	}
@@ -216,4 +205,25 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	{
 		gameStatus = END;
 	}
+}
+
+void cleanup(Board * gameBoard, Winner gameWinner)
+{
+	using namespace std;
+
+	for (int x = 0; x < 8; x++)
+		for (int y = 0; y < 8; y++)
+		{
+			delete gameBoard->pieces[x][x];
+			gameBoard->pieces[x][y] = NULL;
+		}
+
+	system("CLS");
+	cout << endl
+		 << endl
+		 << "*****GAME OVER*****"
+		 << endl
+		 << endl
+		 << gameWinner
+		 << " WON";
 }
