@@ -27,6 +27,6 @@ Bishop::~Bishop()
 
 bool Bishop::Move()
 {
-	return false;
+	return true;
 }
 

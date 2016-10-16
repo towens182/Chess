@@ -19,7 +19,7 @@
 enum GameStatus { NONE, INPROGRESS, END };
 enum Winner {NOBODY, WHITE, BLACK};
 void Menu(GameStatus& gameStatus, Board *gameBoard);
-void drawBoard(Board *gameBoard);
+void drawBoard(GameStatus& gameStatus, Board *gameBoard);
 void createPieces(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
 void cleanup(Board *gameBoard, Winner gameWinner);
@@ -35,7 +35,7 @@ int main()
 	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
 	Menu(gameStatus, gameBoard);
 	do {
-		drawBoard(gameBoard);
+		drawBoard(gameStatus, gameBoard);
 		Move(gameStatus, gameBoard);
 		
 	} while (gameStatus != END);
@@ -62,11 +62,13 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 			{
 				createPieces(gameBoard);
 				gameStatus = INPROGRESS;
-				system("CLS");
-				cout << "\t\t***** STARTING NEW GAME OF CHESS *****"
+				//system("CLS");
+				cout << endl
+					 << "\t\t***** NEW CHESS GAME STARTED *****"
 					 << endl
-					 << "\t\t\t*** WHITE BEGINS ***"
 					 << endl;
+				system("PAUSE");
+				system("CLS");
 			}
 			//If user tries to enter a command before starting a game
 			//tell them and retry menu
@@ -91,13 +93,21 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 			Menu(gameStatus, gameBoard);
 		}
 }
-void drawBoard(Board *gameBoard)
+void drawBoard(GameStatus& gameStatus, Board *gameBoard)
 {
 	using namespace std;
-	system("CLS");
-	cout << "\t\t*****"
+	//system("CLS");
+	char *StatusTypes[] =
+	{
+		"NONE",
+		"IN PROGRESS",
+		"END"
+	};
+
+	cout << "\t  Turn: "
 		<< gameBoard->getTurn()
-		<< "'S TURN*****"
+		<< "\tGame Status: "
+		<< StatusTypes[gameStatus]
 		<< endl
 		<< endl;
 	cout << "\t  -----------------------------------------"
@@ -187,19 +197,23 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		 << "E - End Game"
 		 << endl
 		 << gameBoard->getTurn()
-		 << ": ";
+		 << "'S TURN: ";
 	cin >> command;
 	if (command == 'M' || command == 'm')
 	{
 		system("CLS");
-		drawBoard(gameBoard);
+		drawBoard(gameStatus, gameBoard);
 		cout << endl
 		     << "Piece: ";
 		cin >> piece;
 		transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
-		cout << "Current (x,y -> New (x,y): ";
+		cout << "Separate and enter each number"
+			 << endl
+			 << "Current (x,y) -> New (x,y): ";
 		cin >> oldX >> oldY >> newX >> newY;
+		system("CLS");
 		gameBoard->move(piece, oldX, oldY, newX, newY);
+		
 	}
 	else if(command == 'E' || command == 'e')
 	{

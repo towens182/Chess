@@ -27,5 +27,5 @@ King::~King()
 
 bool King::Move()
 {
-	return false;
+	return true;
 }

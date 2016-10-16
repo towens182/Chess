@@ -27,5 +27,5 @@ Knight::~Knight()
 
 bool Knight::Move()
 {
-	return false;
+	return true;
 }

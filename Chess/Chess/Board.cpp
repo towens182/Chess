@@ -7,38 +7,64 @@ Board::Board()
 
 Board::~Board()
 {
-	delete[] *pieces;
 }
 void Board::move(std::string piece, int oldX, int oldY, int newX, int newY)
 {
 	if (validPiece(piece, oldX, oldY) && validDestination(oldX, oldY, newX, newY))
 	{
-		delete pieces[newY][newX];
-		pieces[newY][newX] = NULL;
-		pieces[newY][newX] = pieces[oldY][oldX];
-		pieces[oldY][oldX] = NULL;
-		if (this->turn == WHITE)
+		if (pieces[oldY][oldX]->Move())
 		{
-			this->turn = BLACK;
+			if (pieces[newY][newX] != NULL)
+			{
+				delete pieces[newY][newX];
+			}
+			std::cout << std::endl
+					  //<< "\t"
+					  << pieces[oldY][oldX]->getPieceName() 
+					  << " MOVED"
+					  << std::endl;
+			pieces[newY][newX] = NULL;
+			pieces[newY][newX] = pieces[oldY][oldX];
+			pieces[oldY][oldX] = NULL;
+			
+			if (this->turn == WHITE)
+			{
+				this->turn = BLACK;
+			}
+			else if (this->turn == BLACK)
+			{
+				this->turn = WHITE;
+			}
 		}
-		else if (this->turn == BLACK)
-		{
-			this->turn = WHITE;
-		}
-
+	}
+	else
+	{
+		return;
 	}
 }
 //Makes sure the piece chosen belongs to the right player
 //and in the chosen destination
 bool Board::validPiece(std::string piece, int oldX, int oldY)
 {
-	if ((piece == pieces[oldY][oldX]->getPieceName()) && (turn == pieces[oldY][oldX]->player))
+	using namespace std;
+
+	if (piece == pieces[oldY][oldX]->getPieceName() && turn == pieces[oldY][oldX]->player)
 	{
 		return true;
 	}
 	else
 	{
-		
+		system("CLS");
+		cout << endl
+			<< endl
+			<< endl
+			<< "\t***** INCORRECT PIECE CHOSEN, TRY AGAIN ******"
+			<< endl
+			<< endl
+			<< "Make sure you select your own piece and the correct position for it."
+			<< endl;
+		system("pause");
+		system("CLS");
 		return false;
 	}
 }
@@ -46,6 +72,8 @@ bool Board::validPiece(std::string piece, int oldX, int oldY)
 //and is either empty or opposite piece
 bool Board::validDestination(int oldX, int oldY, int newX, int newY)
 {
+	using namespace std;
+
 	if ((oldX < 8) && (oldY < 8) && (newX >= 0) && (newY >= 0))
 	{
 		if ((pieces[newY][newX] == NULL) || (pieces[oldY][oldX]->player != pieces[newY][newX]->player))
@@ -54,13 +82,33 @@ bool Board::validDestination(int oldX, int oldY, int newX, int newY)
 		}
 		else
 		{
-			std::cout << "Not a valid desitination";
+			system("CLS");
+			cout << endl
+				 << endl
+				 << endl
+				 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN ******"
+				 << endl
+				 << endl
+				 << "Make sure the desination is either EMPTY or the opposing player's piece."
+				 << endl;
+			system("pause");
+			system("CLS");
 			return false;
 		}
 	}
 	else
 	{
-		std::cout << "Not a valid destination";
+		system("CLS");
+		cout << endl
+			 << endl
+			 << endl
+			 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN ******"
+			 << endl
+			 << endl
+			 << "Make sure you pick valid x and y postitions between 0 - 7."
+			 << endl;
+		system("pause");
+		system("CLS");
 		return false;
 	}
 }

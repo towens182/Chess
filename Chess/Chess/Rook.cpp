@@ -26,5 +26,5 @@ Rook::~Rook()
 
 bool Rook::Move()
 {
-	return false;
+	return true;
 }

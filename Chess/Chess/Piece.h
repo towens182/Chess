@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 class Piece
 {
 public:
@@ -7,13 +8,12 @@ public:
 	Piece();
 	~Piece();
 
-	enum player { WHITE, BLACK };
-	player player;
+	enum Player { WHITE, BLACK };
+	Player player;
 
 
 	virtual bool Move() =0;
 	std::string getPieceName();
-	//bool isWhite();
 
 protected:
 	std::string name;

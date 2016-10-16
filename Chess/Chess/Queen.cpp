@@ -27,5 +27,5 @@ Queen::~Queen()
 
 bool Queen::Move()
 {
-	return false;
+	return true;
 }
