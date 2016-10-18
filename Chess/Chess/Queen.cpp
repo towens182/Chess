@@ -24,7 +24,7 @@ Queen::Queen(char color)
 Queen::~Queen()
 {
 }
-
+//Check if the desired move is possible for Queen
 bool Queen::Move()
 {
 	return true;

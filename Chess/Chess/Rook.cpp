@@ -23,7 +23,7 @@ Rook::~Rook()
 {
 }
 
-
+//Check if the desired move is possible for Rook
 bool Rook::Move()
 {
 	return true;

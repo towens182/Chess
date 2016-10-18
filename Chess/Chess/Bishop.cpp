@@ -24,9 +24,10 @@ Bishop::~Bishop()
 {
 }
 
-
+//Check if the desired move is possible for Bishop
 bool Bishop::Move()
 {
+
 	return true;
 }
 

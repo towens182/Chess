@@ -8,33 +8,27 @@ Board::Board()
 Board::~Board()
 {
 }
-void Board::move(std::string piece, int oldX, int oldY, int newX, int newY)
+void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol)
 {
-	if (validPiece(piece, oldX, oldY) && validDestination(oldX, oldY, newX, newY))
+	if (validDestination(oldRow, oldCol, newRow, newCol) && validPiece(piece, oldRow, oldCol))
 	{
-		if (pieces[oldY][oldX]->Move())
+		//Check if the selected piece can do the move (It's own unique move)
+		if (pieces[oldRow][oldCol]->Move())
 		{
-			if (pieces[newY][newX] != NULL)
+			//Delete the opposing piece if it is in the target location
+			if (pieces[newRow][newCol] != NULL)
 			{
-				delete pieces[newY][newX];
+				delete pieces[newRow][newCol];
 			}
 			std::cout << std::endl
-					  //<< "\t"
-					  << pieces[oldY][oldX]->getPieceName() 
+					  << pieces[oldRow][oldCol]->getPieceName() 
 					  << " MOVED"
 					  << std::endl;
-			pieces[newY][newX] = NULL;
-			pieces[newY][newX] = pieces[oldY][oldX];
-			pieces[oldY][oldX] = NULL;
+			pieces[newRow][newCol] = NULL;
+			pieces[newRow][newCol] = pieces[oldRow][oldCol];
+			pieces[oldRow][oldCol] = NULL;
 			
-			if (this->turn == WHITE)
-			{
-				this->turn = BLACK;
-			}
-			else if (this->turn == BLACK)
-			{
-				this->turn = WHITE;
-			}
+			newTurn();
 		}
 	}
 	else
@@ -44,11 +38,11 @@ void Board::move(std::string piece, int oldX, int oldY, int newX, int newY)
 }
 //Makes sure the piece chosen belongs to the right player
 //and in the chosen destination
-bool Board::validPiece(std::string piece, int oldX, int oldY)
+bool Board::validPiece(std::string piece, int oldRow, int oldCol)
 {
 	using namespace std;
 
-	if (piece == pieces[oldY][oldX]->getPieceName() && turn == pieces[oldY][oldX]->player)
+	if (piece == pieces[oldRow][oldCol]->getPieceName() && turn == pieces[oldRow][oldCol]->player)
 	{
 		return true;
 	}
@@ -56,13 +50,15 @@ bool Board::validPiece(std::string piece, int oldX, int oldY)
 	{
 		system("CLS");
 		cout << endl
-			<< endl
-			<< endl
-			<< "\t***** INCORRECT PIECE CHOSEN, TRY AGAIN ******"
-			<< endl
-			<< endl
-			<< "Make sure you select your own piece and the correct position for it."
-			<< endl;
+			 << endl
+			 << endl
+			 << "\t***** INCORRECT PIECE CHOSEN, TRY AGAIN "
+			 << getTurn()
+			 << " ******"
+			 << endl
+			 << endl
+		 	 << "Make sure you select your own piece and the correct position for it."
+			 << endl;
 		system("pause");
 		system("CLS");
 		return false;
@@ -70,13 +66,13 @@ bool Board::validPiece(std::string piece, int oldX, int oldY)
 }
 //Makes sure the new desination is a valid square on the board
 //and is either empty or opposite piece
-bool Board::validDestination(int oldX, int oldY, int newX, int newY)
+bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
 {
 	using namespace std;
 
-	if ((oldX < 8) && (oldY < 8) && (newX >= 0) && (newY >= 0))
+	if ((oldRow < 8) && (oldCol < 8) && (newRow >= 0) && (newCol >= 0))
 	{
-		if ((pieces[newY][newX] == NULL) || (pieces[oldY][oldX]->player != pieces[newY][newX]->player))
+		if ((pieces[newRow][newCol] == NULL) || (pieces[oldRow][oldCol]->player != pieces[newRow][newCol]->player))
 		{
 			return true;
 		}
@@ -86,10 +82,14 @@ bool Board::validDestination(int oldX, int oldY, int newX, int newY)
 			cout << endl
 				 << endl
 				 << endl
-				 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN ******"
+				 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN "
+				 << getTurn()
+				 << " ******"
 				 << endl
 				 << endl
-				 << "Make sure the desination is either EMPTY or the opposing player's piece."
+				 << "Make sure the desination is either EMPTY"
+				 << endl
+				 << "or contains the opposing player's piece."
 				 << endl;
 			system("pause");
 			system("CLS");
@@ -102,10 +102,12 @@ bool Board::validDestination(int oldX, int oldY, int newX, int newY)
 		cout << endl
 			 << endl
 			 << endl
-			 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN ******"
+			 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN "
+			 << getTurn()
+		 	 << " ******"
 			 << endl
 			 << endl
-			 << "Make sure you pick valid x and y postitions between 0 - 7."
+			 << "Make sure you pick valid ROW and COL postitions between 0 - 7."
 			 << endl;
 		system("pause");
 		system("CLS");

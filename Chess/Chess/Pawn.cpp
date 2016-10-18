@@ -24,7 +24,7 @@ Pawn::Pawn(char color)
 Pawn::~Pawn()
 {
 }
-
+//Check if the desired move is possible for Pawn
 bool Pawn::Move()
 {
 	return true;

@@ -96,7 +96,7 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 void drawBoard(GameStatus& gameStatus, Board *gameBoard)
 {
 	using namespace std;
-	//system("CLS");
+
 	char *StatusTypes[] =
 	{
 		"NONE",
@@ -189,7 +189,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 
 	char command;
 	string piece;
-	int oldX, oldY, newX, newY;
+	int oldRow, oldCol, newRow, newCol = 0;
 	
 	cout << endl
 		 << "M - Move Piece"
@@ -207,12 +207,12 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		     << "Piece: ";
 		cin >> piece;
 		transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
-		cout << "Separate and enter each number"
+		cout << "Separate and enter each number.   Ex: 1 0 3 0 ENTER"
 			 << endl
-			 << "Current (x,y) -> New (x,y): ";
-		cin >> oldX >> oldY >> newX >> newY;
+			 << "Current (ROW, COL) -> New (ROW, COL): ";
+		cin >> oldRow >> oldCol >> newRow >> newCol;
 		system("CLS");
-		gameBoard->move(piece, oldX, oldY, newX, newY);
+		gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
 		
 	}
 	else if(command == 'E' || command == 'e')
@@ -225,19 +225,29 @@ void cleanup(Board * gameBoard, Winner gameWinner)
 {
 	using namespace std;
 
+	char *WinnerTypes[] =
+	{
+		"NOBODY",
+		"WHITE",
+		"BLACK"
+	};
+
 	for (int x = 0; x < 8; x++)
 		for (int y = 0; y < 8; y++)
 		{
-			delete gameBoard->pieces[x][x];
+			delete gameBoard->pieces[x][y];
 			gameBoard->pieces[x][y] = NULL;
 		}
 
 	system("CLS");
-	cout << endl
-		 << endl
-		 << "*****GAME OVER*****"
+	cout << "\t\t***** GAME OVER *****"
 		 << endl
 		 << endl
-		 << gameWinner
-		 << " WON";
+		 << endl
+		 << "\t\t     "
+		 << WinnerTypes[gameWinner]
+		 << " WON"
+		 << endl
+		 << endl
+		 << endl;
 }

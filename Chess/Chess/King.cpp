@@ -24,7 +24,7 @@ King::King(char color)
 King::~King()
 {
 }
-
+//Check if the desired move is possible for King
 bool King::Move()
 {
 	return true;

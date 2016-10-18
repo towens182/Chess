@@ -24,7 +24,7 @@ Knight::Knight(char color)
 Knight::~Knight()
 {
 }
-
+//Check if the desired move is possible for Knight
 bool Knight::Move()
 {
 	return true;
