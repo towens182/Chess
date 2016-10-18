@@ -19,10 +19,10 @@
 enum GameStatus { NONE, INPROGRESS, END };
 enum Winner {NOBODY, WHITE, BLACK};
 void Menu(GameStatus& gameStatus, Board *gameBoard);
-void drawBoard(GameStatus& gameStatus, Board *gameBoard);
-void createPieces(Board *gameBoard);
+void DrawBoard(GameStatus& gameStatus, Board *gameBoard);
+void CreatePieces(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
-void cleanup(Board *gameBoard, Winner gameWinner);
+void Cleanup(Board *gameBoard, Winner gameWinner);
 
 int main()
 {
@@ -32,15 +32,15 @@ int main()
 	Winner gameWinner = NOBODY;
 	Board * gameBoard = new Board();
 
-	cout << "\t\t*****WELCOME TO CHESS*****" << endl << endl;
+	cout << "\t\t***** WELCOME TO CHESS *****" << endl << endl;
 	Menu(gameStatus, gameBoard);
 	do {
-		drawBoard(gameStatus, gameBoard);
+		DrawBoard(gameStatus, gameBoard);
 		Move(gameStatus, gameBoard);
 		
 	} while (gameStatus != END);
 		
-	cleanup(gameBoard, gameWinner);
+	Cleanup(gameBoard, gameWinner);
 	return 0;
 }
 
@@ -60,7 +60,7 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 
 			if (command == 'S' || command == 's')
 			{
-				createPieces(gameBoard);
+				CreatePieces(gameBoard);
 				gameStatus = INPROGRESS;
 				//system("CLS");
 				cout << endl
@@ -93,7 +93,7 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 			Menu(gameStatus, gameBoard);
 		}
 }
-void drawBoard(GameStatus& gameStatus, Board *gameBoard)
+void DrawBoard(GameStatus& gameStatus, Board *gameBoard)
 {
 	using namespace std;
 
@@ -103,7 +103,7 @@ void drawBoard(GameStatus& gameStatus, Board *gameBoard)
 		"IN PROGRESS",
 		"END"
 	};
-
+	//Display turn and game status for user
 	cout << "\t  Turn: "
 		<< gameBoard->getTurn()
 		<< "\tGame Status: "
@@ -141,7 +141,7 @@ void drawBoard(GameStatus& gameStatus, Board *gameBoard)
 		 << endl;
 }
 
-void createPieces(Board *gameBoard)
+void CreatePieces(Board *gameBoard)
 {
 	//Initialize all array locations to NULL
 	for(int x = 0; x < 8; x++)
@@ -182,7 +182,7 @@ void createPieces(Board *gameBoard)
 		gameBoard->pieces[6][y] = new Pawn('B');
 	}
 }
-
+//Get user's input, do they want to move or end the game
 void Move(GameStatus& gameStatus, Board * gameBoard)
 {
 	using namespace std;
@@ -202,7 +202,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	if (command == 'M' || command == 'm')
 	{
 		system("CLS");
-		drawBoard(gameStatus, gameBoard);
+		DrawBoard(gameStatus, gameBoard);
 		cout << endl
 		     << "Piece: ";
 		cin >> piece;
@@ -220,8 +220,8 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		gameStatus = END;
 	}
 }
-
-void cleanup(Board * gameBoard, Winner gameWinner)
+//Delete objects and prompt the winner of the game
+void Cleanup(Board * gameBoard, Winner gameWinner)
 {
 	using namespace std;
 

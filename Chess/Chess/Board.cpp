@@ -69,7 +69,7 @@ bool Board::validPiece(std::string piece, int oldRow, int oldCol)
 bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
 {
 	using namespace std;
-
+	//Make sure locations are valid numbers between 0-7
 	if ((oldRow < 8) && (oldCol < 8) && (newRow >= 0) && (newCol >= 0))
 	{
 		if ((pieces[newRow][newCol] == NULL) || (pieces[oldRow][oldCol]->player != pieces[newRow][newCol]->player))
@@ -114,6 +114,7 @@ bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
 		return false;
 	}
 }
+//Returns who has the current turn
 std::string Board::getTurn()
 {
 	if (this->turn == WHITE)
@@ -130,7 +131,7 @@ std::string Board::getTurn()
 		return "ERROR WHO'S TURN?";
 	}
 }
-
+//When a successful move has been made newTurn switches to the opposing player
 void Board::newTurn()
 {
 	if (this->turn == WHITE)
