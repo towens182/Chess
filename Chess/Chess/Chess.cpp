@@ -23,7 +23,7 @@ void DrawBoard(GameStatus& gameStatus, Board *gameBoard);
 void CreatePieces(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
 void Cleanup(Board *gameBoard, Winner gameWinner);
-bool GetInput(std::string& piece, int& oldRow, int& oldCol, int& newRow, int& newCol);
+bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
 
 int main()
 {
@@ -206,25 +206,19 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		{
 			system("CLS");
 			DrawBoard(gameStatus, gameBoard);
-			//GetInput(piece, oldRow, oldCol, newRow, newCol);
+			
 			cout << endl
 				 << "Piece: ";
 			cin >> piece;
+			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
 			
-			char input[20];
-		
-			cout << "Separate and enter each number.   Ex: 1 0 3 0 ENTER"
-				 << endl
-				 << "Current (ROW, COL) -> New (ROW, COL): ";
-			cin.ignore();
-			cin.getline(input, 15);
 			
-				//getline of whole thing and put into char array
+			//getline of whole thing and put into char array
 			//call method and then assign to variables and call by reference convert to int
 			
 			
-			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
 			
+			GetInput(oldRow, oldCol, newRow, newCol);
 			system("CLS");
 			gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
 		}
@@ -282,20 +276,63 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 		 << endl;
 }
 
-bool GetInput(std::string & piece, int & oldRow, int & oldCol, int & newRow, int & newCol)
+bool GetInput(int & oldRow, int & oldCol, int & newRow, int & newCol)
 {
 	using namespace std;
 
-	char input[20];
+	char input[5];
 	cout << "Enter PIECE Currrent ROW Current COL New ROW New COL"
 		<< endl
-		<< "EX: WP 1 0 3 0 ENTER"
+		<< "Examp: WP 1030 ENTER"
 		<< endl
-		<< "USER: ";
+		<< "Input: ";
 	cin.ignore();
-	cin.getline(input, 15);
+	cin.getline(input, 5);
+	if (isdigit(input[0]))
+	{
+		oldRow = (input[0] - 48);
+	}
+	else
+	{
+		system("CLS");
+		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
+			 << endl;
+		return false;
+	}
+	if (isdigit(input[1]))
+	{
+		oldCol = (input[1] - 48);
+	}
+	else
+	{
+		system("CLS");
+		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
+			<< endl;
+		return false;
+	}
+	if (isdigit(input[2]))
+	{
+		oldRow = (input[2] - 48);
+	}
+	else
+	{
+		system("CLS");
+		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
+			<< endl;
+		return false;
+	}
+	if (isdigit(input[3]))
+	{
+		oldRow = (input[3] - 48);
+	}
+	else
+	{
+		system("CLS");
+		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
+			<< endl;
+		return false;
+	}
 
 
-
-	return false;
+	return true;
 }
