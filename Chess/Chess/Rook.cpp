@@ -26,5 +26,16 @@ Rook::~Rook()
 //Check if the desired move is possible for Rook
 bool Rook::Move()
 {
+	std::cout << std::endl;
+	if (this->player == WHITE)
+	{
+		std::cout << "WHITE";
+	}
+	else
+	{
+		std::cout << "BLACK";
+	}
+	std::cout << " ROOK MOVED"
+		      << std::endl;
 	return true;
 }

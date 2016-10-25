@@ -23,10 +23,10 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 
 
 			//Move into each piece in move function/////////////////
-			std::cout << std::endl
+			/*std::cout << std::endl
 					  << pieces[oldRow][oldCol]->getPieceName() 
 					  << " MOVED"
-					  << std::endl;
+					  << std::endl;*/
 			////////////////////////////////////////
 			pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];

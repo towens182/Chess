@@ -27,6 +27,17 @@ Pawn::~Pawn()
 //Check if the desired move is possible for Pawn
 bool Pawn::Move()
 {
+	std::cout << std::endl;
+	if (this->player == WHITE)
+	{
+		std::cout << "WHITE";
+	}
+	else
+	{
+		std::cout << "BLACK";
+	}
+		std::cout << " PAWN MOVED"
+				  << std::endl;
 	return true;
 }
 

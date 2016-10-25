@@ -23,6 +23,7 @@ void DrawBoard(GameStatus& gameStatus, Board *gameBoard);
 void CreatePieces(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
 void Cleanup(Board *gameBoard, Winner gameWinner);
+bool GetInput(std::string& piece, int& oldRow, int& oldCol, int& newRow, int& newCol);
 
 int main()
 {
@@ -189,7 +190,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 
 	char command;
 	string piece;
-	int oldRow, oldCol, newRow, newCol = 0;
+	int oldRow, oldCol, newRow, newCol;
 
 	cout << endl
 		<< "M - Move Piece"
@@ -205,20 +206,24 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		{
 			system("CLS");
 			DrawBoard(gameStatus, gameBoard);
+			//GetInput(piece, oldRow, oldCol, newRow, newCol);
 			cout << endl
 				 << "Piece: ";
 			cin >> piece;
-			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
 			
-			//getline of whole thing and put into char array
-			//call method and then assign to variables and call by reference convert to int
+			char input[20];
+		
 			cout << "Separate and enter each number.   Ex: 1 0 3 0 ENTER"
 				 << endl
 				 << "Current (ROW, COL) -> New (ROW, COL): ";
-			cin >> oldRow >> oldCol >> newRow >> newCol;
+			cin.ignore();
+			cin.getline(input, 15);
+			
+				//getline of whole thing and put into char array
+			//call method and then assign to variables and call by reference convert to int
 			
 			
-			
+			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
 			
 			system("CLS");
 			gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
@@ -275,4 +280,22 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 		 << endl
 		 << endl
 		 << endl;
+}
+
+bool GetInput(std::string & piece, int & oldRow, int & oldCol, int & newRow, int & newCol)
+{
+	using namespace std;
+
+	char input[20];
+	cout << "Enter PIECE Currrent ROW Current COL New ROW New COL"
+		<< endl
+		<< "EX: WP 1 0 3 0 ENTER"
+		<< endl
+		<< "USER: ";
+	cin.ignore();
+	cin.getline(input, 15);
+
+
+
+	return false;
 }

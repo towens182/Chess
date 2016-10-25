@@ -27,5 +27,16 @@ Knight::~Knight()
 //Check if the desired move is possible for Knight
 bool Knight::Move()
 {
+	std::cout << std::endl;
+	if (this->player == WHITE)
+	{
+		std::cout << "WHITE";
+	}
+	else
+	{
+		std::cout << "BLACK";
+	}
+	std::cout << " KNIGHT MOVED"
+		      << std::endl;
 	return true;
 }
