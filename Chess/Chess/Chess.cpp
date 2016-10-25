@@ -62,7 +62,6 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 			{
 				CreatePieces(gameBoard);
 				gameStatus = INPROGRESS;
-				//system("CLS");
 				cout << endl
 					 << "\t\t***** NEW CHESS GAME STARTED *****"
 					 << endl
@@ -79,6 +78,7 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 
 				Menu(gameStatus, gameBoard);
 			}
+			//Reject anything else that isn't a valid command
 			else
 			{
 				throw string("\t\t***** NOT A VALID INPUT!! *****");
@@ -190,34 +190,59 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	char command;
 	string piece;
 	int oldRow, oldCol, newRow, newCol = 0;
-	
+
 	cout << endl
-		 << "M - Move Piece"
-		 << endl
-		 << "E - End Game"
-		 << endl
-		 << gameBoard->getTurn()
-		 << "'S TURN: ";
-	cin >> command;
-	if (command == 'M' || command == 'm')
+		<< "M - Move Piece"
+		<< endl
+		<< "E - End Game"
+		<< endl
+		<< gameBoard->getTurn()
+		<< "'S TURN: ";
+	try
 	{
-		system("CLS");
-		DrawBoard(gameStatus, gameBoard);
-		cout << endl
-		     << "Piece: ";
-		cin >> piece;
-		transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
-		cout << "Separate and enter each number.   Ex: 1 0 3 0 ENTER"
-			 << endl
-			 << "Current (ROW, COL) -> New (ROW, COL): ";
-		cin >> oldRow >> oldCol >> newRow >> newCol;
-		system("CLS");
-		gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
-		
+		cin >> command;
+		if (command == 'M' || command == 'm')
+		{
+			system("CLS");
+			DrawBoard(gameStatus, gameBoard);
+			cout << endl
+				 << "Piece: ";
+			cin >> piece;
+			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
+			
+			//getline of whole thing and put into char array
+			//call method and then assign to variables and call by reference convert to int
+			cout << "Separate and enter each number.   Ex: 1 0 3 0 ENTER"
+				 << endl
+				 << "Current (ROW, COL) -> New (ROW, COL): ";
+			cin >> oldRow >> oldCol >> newRow >> newCol;
+			
+			
+			
+			
+			system("CLS");
+			gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
+		}
+		else if (command == 'E' || command == 'e')
+		{
+			gameStatus = END;
+		}
+		else
+		{
+			throw string("\t\t***** NOT A VALID INPUT!! *****");
+		}
 	}
-	else if(command == 'E' || command == 'e')
+	catch (string message)
 	{
-		gameStatus = END;
+		system("CLS");
+		cout << message
+			 << endl
+			 << endl
+			 << endl
+			 << "Choose Move or End game."
+			 << endl;
+		system("pause");
+		system("CLS");
 	}
 }
 //Delete objects and prompt the winner of the game

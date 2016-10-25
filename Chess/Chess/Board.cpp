@@ -20,10 +20,14 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 			{
 				delete pieces[newRow][newCol];
 			}
+
+
+			//Move into each piece in move function/////////////////
 			std::cout << std::endl
 					  << pieces[oldRow][oldCol]->getPieceName() 
 					  << " MOVED"
 					  << std::endl;
+			////////////////////////////////////////
 			pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];
 			pieces[oldRow][oldCol] = NULL;
