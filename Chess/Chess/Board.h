@@ -8,6 +8,8 @@ class Board
 public:
 	Piece * pieces[8][8];
 	std::string getTurn();
+	enum Turn { WHITE, BLACK };
+	Board::Turn turn;
 	void newTurn();
 
 	Board();
@@ -17,9 +19,7 @@ public:
 	bool validPiece(std::string piece, int oldX, int oldY);
 	bool validDestination(int oldX, int oldY, int newX, int newY);
 
-private:
-	enum Turn { WHITE, BLACK };
-	Board::Turn turn;
+
 
 };
 

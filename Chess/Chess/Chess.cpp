@@ -63,12 +63,10 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 			{
 				CreatePieces(gameBoard);
 				gameStatus = INPROGRESS;
-				cout << endl
-					 << "\t\t***** NEW CHESS GAME STARTED *****"
-					 << endl
-					 << endl;
-				system("PAUSE");
 				system("CLS");
+				cout << "***** NEW CHESS GAME STARTED *****"
+					 << endl;
+				
 			}
 			//If user tries to enter a command before starting a game
 			//tell them and retry menu
@@ -193,12 +191,12 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	int oldRow, oldCol, newRow, newCol;
 
 	cout << endl
-		<< "M - Move Piece"
-		<< endl
-		<< "E - End Game"
-		<< endl
-		<< gameBoard->getTurn()
-		<< "'S TURN: ";
+		 << "M - Move Piece"
+		 << endl
+		 << "E - End Game"
+		 << endl
+		 << gameBoard->getTurn()
+		 << "'S TURN: ";
 	try
 	{
 		cin >> command;
@@ -212,15 +210,11 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 			cin >> piece;
 			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
 			
-			
-			//getline of whole thing and put into char array
-			//call method and then assign to variables and call by reference convert to int
-			
-			
-			
-			GetInput(oldRow, oldCol, newRow, newCol);
-			system("CLS");
-			gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
+			if (GetInput(oldRow, oldCol, newRow, newCol))
+			{
+				system("CLS");
+				gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
+			}
 		}
 		else if (command == 'E' || command == 'e')
 		{
@@ -275,64 +269,67 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 		 << endl
 		 << endl;
 }
-
-bool GetInput(int & oldRow, int & oldCol, int & newRow, int & newCol)
+//Gets line of current locations and source destinations
+bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 {
 	using namespace std;
 
-	char input[5];
-	cout << "Enter PIECE Currrent ROW Current COL New ROW New COL"
+	char input[15];
+	cout << "Enter Currrent ROW Current COL New ROW New COL"
 		<< endl
-		<< "Examp: WP 1030 ENTER"
+		<< "Example: 1030 ENTER"
 		<< endl
-		<< "Input: ";
+		<< " Player: ";
 	cin.ignore();
-	cin.getline(input, 5);
+	cin.getline(input, 15);
+	
 	if (isdigit(input[0]))
 	{
-		oldRow = (input[0] - 48);
+		oldRow = (input[0] - '0');
 	}
 	else
 	{
 		system("CLS");
-		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
+		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
 			 << endl;
 		return false;
 	}
+
 	if (isdigit(input[1]))
 	{
-		oldCol = (input[1] - 48);
+		oldCol = (input[1] - '0');
 	}
 	else
 	{
 		system("CLS");
-		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
-			<< endl;
-		return false;
-	}
-	if (isdigit(input[2]))
-	{
-		oldRow = (input[2] - 48);
-	}
-	else
-	{
-		system("CLS");
-		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
-			<< endl;
-		return false;
-	}
-	if (isdigit(input[3]))
-	{
-		oldRow = (input[3] - 48);
-	}
-	else
-	{
-		system("CLS");
-		cout << "INCORRECT LOCATION - MUST BE INTEGERS 0 - 7"
+		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
 			<< endl;
 		return false;
 	}
 
+	if (isdigit(input[2]))
+	{
+		newRow = (input[2] - '0');
+	}
+	else
+	{
+		system("CLS");
+		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
+			<< endl;
+		return false;
+	}
+
+	if (isdigit(input[3]))
+	{
+		newCol = (input[3] - '0');
+	}
+	else
+	{
+		system("CLS");
+		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
+			<< endl;
+		return false;
+	}
 
 	return true;
 }

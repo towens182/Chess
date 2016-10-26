@@ -21,13 +21,6 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 				delete pieces[newRow][newCol];
 			}
 
-
-			//Move into each piece in move function/////////////////
-			/*std::cout << std::endl
-					  << pieces[oldRow][oldCol]->getPieceName() 
-					  << " MOVED"
-					  << std::endl;*/
-			////////////////////////////////////////
 			pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];
 			pieces[oldRow][oldCol] = NULL;
@@ -45,27 +38,27 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 bool Board::validPiece(std::string piece, int oldRow, int oldCol)
 {
 	using namespace std;
-
-	if (piece == pieces[oldRow][oldCol]->getPieceName() && turn == pieces[oldRow][oldCol]->player)
+	if ((pieces[oldRow][oldCol] == NULL) || (this->turn != pieces[oldRow][oldCol]->player))
 	{
-		return true;
+		cout << "***** INCORRECT LOCATION CHOSEN ******"
+			 << endl;
+		return false;
 	}
 	else
 	{
-		system("CLS");
-		cout << endl
-			 << endl
-			 << endl
-			 << "\t***** INCORRECT PIECE CHOSEN, TRY AGAIN "
-			 << getTurn()
-			 << " ******"
-			 << endl
-			 << endl
-		 	 << "Make sure you select your own piece and the correct position for it."
-			 << endl;
-		system("pause");
-		system("CLS");
-		return false;
+		if ((piece == pieces[oldRow][oldCol]->getPieceName()) && (this->turn == pieces[oldRow][oldCol]->player))
+		{
+			return true;
+		}
+		else
+		{
+			system("CLS");
+			cout << "***** INCORRECT PIECE CHOSEN, TRY AGAIN "
+				<< getTurn()
+				<< " ******"
+				<< endl;
+			return false;
+		}
 	}
 }
 //Makes sure the new desination is a valid square on the board
@@ -83,38 +76,18 @@ bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
 		else
 		{
 			system("CLS");
-			cout << endl
-				 << endl
-				 << endl
-				 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN "
-				 << getTurn()
-				 << " ******"
-				 << endl
-				 << endl
-				 << "Make sure the desination is either EMPTY"
-				 << endl
-				 << "or contains the opposing player's piece."
-				 << endl;
-			system("pause");
-			system("CLS");
+			cout << "***** INCORRECT DESINATION CHOSEN, TRY AGAIN "
+				<< getTurn()
+				<< " ******"
+				<< endl;
 			return false;
 		}
 	}
 	else
 	{
 		system("CLS");
-		cout << endl
-			 << endl
-			 << endl
-			 << "\t***** INCORRECT DESINATION CHOSEN, TRY AGAIN "
-			 << getTurn()
-		 	 << " ******"
-			 << endl
-			 << endl
-			 << "Make sure you pick valid ROW and COL postitions between 0 - 7."
+		cout << "***** ROW AND COL MUST BE BETWEEN 0 - 7 *****"
 			 << endl;
-		system("pause");
-		system("CLS");
 		return false;
 	}
 }
