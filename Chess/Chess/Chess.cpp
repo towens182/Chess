@@ -11,6 +11,7 @@
 #include "Pawn.h"
 #include "Queen.h"
 #include "Rook.h"
+#include "StoredMove.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -21,7 +22,7 @@ enum Winner {NOBODY, WHITE, BLACK};
 void Menu(GameStatus& gameStatus, Board *gameBoard);
 void DrawBoard(GameStatus& gameStatus, Board *gameBoard);
 void CreatePieces(Board *gameBoard);
-void Move(GameStatus& gameStatus, Board *gameBoard);
+void Move(GameStatus& gameStatus, Board *gameBoard, StoredMove &);
 void Cleanup(Board *gameBoard, Winner gameWinner);
 bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
 
@@ -32,12 +33,13 @@ int main()
 	GameStatus gameStatus = NONE;
 	Winner gameWinner = NOBODY;
 	Board * gameBoard = new Board();
+	StoredMove storedmove;
 
 	cout << "\t\t***** WELCOME TO CHESS *****" << endl << endl;
 	Menu(gameStatus, gameBoard);
 	do {
 		DrawBoard(gameStatus, gameBoard);
-		Move(gameStatus, gameBoard);
+		Move(gameStatus, gameBoard, storedmove);
 		
 	} while (gameStatus != END);
 		
@@ -182,7 +184,7 @@ void CreatePieces(Board *gameBoard)
 	}
 }
 //Get user's input, do they want to move or end the game
-void Move(GameStatus& gameStatus, Board * gameBoard)
+void Move(GameStatus& gameStatus, Board * gameBoard, StoredMove &)
 {
 	using namespace std;
 
@@ -193,6 +195,8 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	cout << endl
 		 << "M - Move Piece"
 		 << endl
+		 << "U - Undo Move"
+	 	 << endl
 		 << "E - End Game"
 		 << endl
 		 << gameBoard->getTurn()
@@ -219,6 +223,13 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		else if (command == 'E' || command == 'e')
 		{
 			gameStatus = END;
+		}
+		else if (command == 'U' || command == 'u')
+		{
+			
+			//code for undo
+
+
 		}
 		else
 		{
