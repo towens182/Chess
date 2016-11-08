@@ -22,7 +22,7 @@ enum Winner {NOBODY, WHITE, BLACK};
 void Menu(GameStatus& gameStatus, Board *gameBoard);
 void DrawBoard(GameStatus& gameStatus, Board *gameBoard);
 void CreatePieces(Board *gameBoard);
-void Move(GameStatus& gameStatus, Board *gameBoard, StoredMove &);
+void Move(GameStatus& gameStatus, Board *gameBoard);
 void Cleanup(Board *gameBoard, Winner gameWinner);
 bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
 
@@ -33,13 +33,13 @@ int main()
 	GameStatus gameStatus = NONE;
 	Winner gameWinner = NOBODY;
 	Board * gameBoard = new Board();
-	StoredMove storedmove;
+	
 
 	cout << "\t\t***** WELCOME TO CHESS *****" << endl << endl;
 	Menu(gameStatus, gameBoard);
 	do {
 		DrawBoard(gameStatus, gameBoard);
-		Move(gameStatus, gameBoard, storedmove);
+		Move(gameStatus, gameBoard);
 		
 	} while (gameStatus != END);
 		
@@ -184,7 +184,7 @@ void CreatePieces(Board *gameBoard)
 	}
 }
 //Get user's input, do they want to move or end the game
-void Move(GameStatus& gameStatus, Board * gameBoard, StoredMove &)
+void Move(GameStatus& gameStatus, Board * gameBoard)
 {
 	using namespace std;
 

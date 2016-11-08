@@ -5,28 +5,24 @@ class StoredMove
 public:
 	StoredMove();
 	~StoredMove();
-	bool remFirst();
 	
-	StoredMove * getNext();
-	void addMoves(int, int, int, int);
-	
-
-	int getValue();
 	void setValues(int, int, int, int);
 
-private:
-	
-	Piece * pieceMoved;
-	Piece * capturedPiece;
+	int getOldRow();
+	int getOldCol();
+	int getNewRow();
+	int getNewCol();
+	Piece * getCaptured();
+	Piece * getMoved();
 
-	StoredMove * nextStoredMove;
-	StoredMove * prevStoredMove;
-	
+
+private:
 	int oldRow;
 	int oldCol;
 	int newRow;
 	int newCol;
-protected:
-	StoredMove * listhead;
+	Piece * pieceCaptured;
+	Piece * pieceMoved;
+
 };
 
