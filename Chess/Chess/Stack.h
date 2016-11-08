@@ -1,15 +1,15 @@
 #pragma once
 #include "StoredMove.h"
+
 class Stack
 {
 public:
 	Stack();
 	~Stack();
 
-	void push(StoredMove);
-	bool pop(StoredMove);
-	bool isEmpty();
+	void push(StoredMove * storedMove);
+	bool pop(StoredMove * storedMove);
 private:
-	Stack * listhead;
+	StoredMove * listhead;
 };
 

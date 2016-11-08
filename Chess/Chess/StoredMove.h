@@ -5,8 +5,10 @@ class StoredMove
 public:
 	StoredMove();
 	~StoredMove();
-	
+	StoredMove * getNext();
 	void setValues(int, int, int, int);
+	void setPieces(Piece * captured, Piece * moved);
+	void setNext(StoredMove *);
 
 	int getOldRow();
 	int getOldCol();
@@ -14,8 +16,7 @@ public:
 	int getNewCol();
 	Piece * getCaptured();
 	Piece * getMoved();
-
-
+	
 private:
 	int oldRow;
 	int oldCol;
@@ -23,6 +24,6 @@ private:
 	int newCol;
 	Piece * pieceCaptured;
 	Piece * pieceMoved;
-
+	StoredMove * nextMove;
 };
 

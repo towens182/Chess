@@ -15,11 +15,9 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 		//Check if the selected piece can do the move (It's own unique move)
 		if (pieces[oldRow][oldCol]->Move())
 		{
-			//Delete the opposing piece if it is in the target location
-			if (pieces[newRow][newCol] != NULL)
-			{
-				delete pieces[newRow][newCol];
-			}
+			StoredMove * SM = new StoredMove();
+			SM->setPieces(pieces[newRow][newCol], pieces[oldRow][oldCol]);
+			SM->setValues(oldRow, oldCol, newRow, newCol);
 
 			pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];

@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include "Piece.h"
+#include "StoredMove.h"
+#include "Stack.h"
 
 class Board
 {
@@ -18,9 +20,6 @@ public:
 
 	bool validPiece(std::string piece, int oldX, int oldY);
 	bool validDestination(int oldX, int oldY, int newX, int newY);
-
-
-
 };
 
 

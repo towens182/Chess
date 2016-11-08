@@ -12,12 +12,13 @@ Stack::~Stack()
 {
 }
 
-void Stack::push(StoredMove)
+void Stack::push(StoredMove * storedMove)
 {
-
+	storedMove->setNext(listhead);			//point to the previous first, could be NULL
+	listhead = storedMove;
 }
 
-bool Stack::pop(StoredMove)
+bool Stack::pop(StoredMove * storedMove)
 {
 	if (listhead == nullptr)
 	{
