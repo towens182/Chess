@@ -25,6 +25,7 @@ void CreatePieces(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
 void Cleanup(Board *gameBoard, Winner gameWinner);
 bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
+Stack stack;
 
 int main()
 {
@@ -192,8 +193,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	string piece;
 	int oldRow, oldCol, newRow, newCol;
 
-	cout << endl
-		 << "M - Move Piece"
+	cout << "M - Move Piece"
 		 << endl
 		 << "U - Undo Move"
 	 	 << endl
@@ -228,7 +228,6 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		{
 			
 			//code for undo
-
 
 		}
 		else
@@ -287,10 +286,10 @@ bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 
 	char input[15];
 	cout << "Enter Currrent ROW Current COL New ROW New COL"
-		<< endl
-		<< "Example: 1030 ENTER"
-		<< endl
-		<< " Player: ";
+	 	 << endl
+		 << "Example: 1030 ENTER"
+		 << endl
+		 << " Player: ";
 	cin.ignore();
 	cin.getline(input, 15);
 	

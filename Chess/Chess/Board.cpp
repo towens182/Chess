@@ -8,7 +8,7 @@ Board::Board()
 Board::~Board()
 {
 }
-void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol)
+void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol, Stack stack)
 {
 	if (validDestination(oldRow, oldCol, newRow, newCol) && validPiece(piece, oldRow, oldCol))
 	{
@@ -18,6 +18,7 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 			StoredMove * SM = new StoredMove();
 			SM->setPieces(pieces[newRow][newCol], pieces[oldRow][oldCol]);
 			SM->setValues(oldRow, oldCol, newRow, newCol);
+			stack.push(SM);
 
 			pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];
@@ -31,6 +32,7 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 		return;
 	}
 }
+
 //Makes sure the piece chosen belongs to the right player
 //and in the chosen destination
 bool Board::validPiece(std::string piece, int oldRow, int oldCol)
@@ -118,4 +120,7 @@ void Board::newTurn()
 		this->turn = WHITE;
 	}
 }
+bool Board::Undo(Stack stack)
+{
 
+}

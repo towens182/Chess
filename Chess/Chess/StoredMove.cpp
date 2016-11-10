@@ -5,6 +5,8 @@
 StoredMove::StoredMove()
 {
 	pieceCaptured = nullptr;
+	pieceMoved = nullptr;
+	nextMove = nullptr;
 }
 
 
