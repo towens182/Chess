@@ -8,7 +8,7 @@ Board::Board()
 Board::~Board()
 {
 }
-void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol, Stack stack)
+void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol, Stack& stack)
 {
 	if (validDestination(oldRow, oldCol, newRow, newCol) && validPiece(piece, oldRow, oldCol))
 	{
@@ -20,7 +20,7 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 			SM->setValues(oldRow, oldCol, newRow, newCol);
 			stack.push(SM);
 
-			pieces[newRow][newCol] = NULL;
+			//pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];
 			pieces[oldRow][oldCol] = NULL;
 			
@@ -120,7 +120,17 @@ void Board::newTurn()
 		this->turn = WHITE;
 	}
 }
-bool Board::Undo(Stack stack)
+bool Board::Undo(Stack& stack)
 {
-
+	if (!stack.isEmpty())
+	{
+		pieces[stack.getOldRow()][stack.getOldCol()] = stack.getMoved();
+		pieces[stack.getNewRow()][stack.getNewCol()] = stack.getCaptured();
+		stack.pop();
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

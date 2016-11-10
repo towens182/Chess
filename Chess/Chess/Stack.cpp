@@ -18,7 +18,7 @@ void Stack::push(StoredMove * storedMove)
 	listhead = storedMove;
 }
 
-bool Stack::pop(StoredMove * storedMove)
+bool Stack::pop()
 {
 	if (listhead == nullptr)
 	{
@@ -28,4 +28,46 @@ bool Stack::pop(StoredMove * storedMove)
 	listhead = first->getNext();
 	delete first;
 	return true;
+}
+
+bool Stack::isEmpty()
+{
+	if (listhead == nullptr)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+int Stack::getOldRow()
+{
+	return listhead->getOldRow();
+}
+
+int Stack::getOldCol()
+{
+	return listhead->getOldCol();
+}
+
+int Stack::getNewRow()
+{
+	return listhead->getNewRow();
+}
+
+int Stack::getNewCol()
+{
+	return listhead->getNewCol();
+}
+
+Piece * Stack::getCaptured()
+{
+	return listhead->getCaptured();
+}
+
+Piece * Stack::getMoved()
+{
+	return listhead->getMoved();
 }

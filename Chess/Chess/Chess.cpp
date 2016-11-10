@@ -56,6 +56,7 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 		cout
 		     << "S - Start Game" << endl
 			 << "M - Move Piece" << endl
+			 << "U - Undo Move" << endl
 			 << "E - End Game" << endl << endl
 			 << "USER: ";
 		try
@@ -67,18 +68,14 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 				CreatePieces(gameBoard);
 				gameStatus = INPROGRESS;
 				system("CLS");
-				cout << "***** NEW CHESS GAME STARTED *****"
-					 << endl;
-				
+				cout << "\t\t***** NEW CHESS GAME STARTED *****"
+					 << endl;	
 			}
 			//If user tries to enter a command before starting a game
 			//tell them and retry menu
-			else if (command == 'E' || command == 'e' || command == 'M' || command == 'm')
+			else if (command == 'E' || command == 'e' || command == 'M' || command == 'm' || command == 'U' || command == 'u')
 			{
-				system("CLS");
-				cout << "\t\t***** PLEASE START THE GAME FIRST *****" << endl << endl;
-
-				Menu(gameStatus, gameBoard);
+				throw string("\t\t***** PLEASE START THE GAME FIRST *****");
 			}
 			//Reject anything else that isn't a valid command
 			else
@@ -217,7 +214,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 			if (GetInput(oldRow, oldCol, newRow, newCol))
 			{
 				system("CLS");
-				gameBoard->move(piece, oldRow, oldCol, newRow, newCol);
+				gameBoard->move(piece, oldRow, oldCol, newRow, newCol, stack);
 			}
 		}
 		else if (command == 'E' || command == 'e')
@@ -227,7 +224,14 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		else if (command == 'U' || command == 'u')
 		{
 			
-			//code for undo
+			if (gameBoard->Undo(stack))
+			{
+
+			}
+			else 
+			{
+				throw string("\t\t****** NO TURNS TO UNDO ******");
+			}
 
 		}
 		else
@@ -239,13 +243,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	{
 		system("CLS");
 		cout << message
-			 << endl
-			 << endl
-			 << endl
-			 << "Choose Move or End game."
 			 << endl;
-		system("pause");
-		system("CLS");
 	}
 }
 //Delete objects and prompt the winner of the game
