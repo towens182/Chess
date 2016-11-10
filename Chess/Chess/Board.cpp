@@ -22,7 +22,7 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 
 			//pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];
-			pieces[oldRow][oldCol] = NULL;
+			pieces[oldRow][oldCol] = nullptr;
 			
 			newTurn();
 		}
@@ -38,7 +38,7 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 bool Board::validPiece(std::string piece, int oldRow, int oldCol)
 {
 	using namespace std;
-	if ((pieces[oldRow][oldCol] == NULL) || (this->turn != pieces[oldRow][oldCol]->player))
+	if ((pieces[oldRow][oldCol] == nullptr) || (this->turn != pieces[oldRow][oldCol]->player))
 	{
 		cout << "***** INCORRECT LOCATION CHOSEN ******"
 			 << endl;
@@ -69,7 +69,7 @@ bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
 	//Make sure locations are valid numbers between 0-7
 	if ((oldRow < 8) && (oldCol < 8) && (newRow >= 0) && (newCol >= 0))
 	{
-		if ((pieces[newRow][newCol] == NULL) || (pieces[oldRow][oldCol]->player != pieces[newRow][newCol]->player))
+		if ((pieces[newRow][newCol] == nullptr) || (pieces[oldRow][oldCol]->player != pieces[newRow][newCol]->player))
 		{
 			return true;
 		}
@@ -102,11 +102,6 @@ std::string Board::getTurn()
 	{
 		return "BLACK";
 	}
-	else
-	{
-		//For debugging purposes
-		return "ERROR WHO'S TURN?";
-	}
 }
 //When a successful move has been made newTurn switches to the opposing player
 void Board::newTurn()
@@ -120,6 +115,7 @@ void Board::newTurn()
 		this->turn = WHITE;
 	}
 }
+
 bool Board::Undo(Stack& stack)
 {
 	if (!stack.isEmpty())

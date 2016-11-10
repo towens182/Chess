@@ -226,7 +226,9 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 			
 			if (gameBoard->Undo(stack))
 			{
-
+				system("CLS");
+				cout << "UNDO SUCCESSFUL"
+					 << endl;
 			}
 			else 
 			{
@@ -262,9 +264,12 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 		for (int y = 0; y < 8; y++)
 		{
 			delete gameBoard->pieces[x][y];
-			gameBoard->pieces[x][y] = NULL;
+			gameBoard->pieces[x][y] = nullptr;
 		}
-
+	while (!stack.isEmpty())
+	{
+		stack.pop();
+	}
 	system("CLS");
 	cout << "\t\t***** GAME OVER *****"
 		 << endl
