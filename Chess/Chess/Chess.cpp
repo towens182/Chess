@@ -259,13 +259,14 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 		"WHITE",
 		"BLACK"
 	};
-
+	//Delete pieces on gameboard
 	for (int x = 0; x < 8; x++)
 		for (int y = 0; y < 8; y++)
 		{
 			delete gameBoard->pieces[x][y];
 			gameBoard->pieces[x][y] = nullptr;
 		}
+	//Delete contents of stack
 	while (!stack.isEmpty())
 	{
 		stack.pop();
