@@ -16,6 +16,7 @@
 #include <string>
 #include <iomanip>
 #include <algorithm>
+#include <fstream>
 
 enum GameStatus { NONE, INPROGRESS, END };
 enum Winner {NOBODY, WHITE, BLACK};
@@ -194,6 +195,8 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		 << endl
 		 << "U - Undo Move"
 	 	 << endl
+		 << "W - Write Game to File"
+		 << endl
 		 << "E - End Game"
 		 << endl
 		 << gameBoard->getTurn()
@@ -220,6 +223,13 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		else if (command == 'E' || command == 'e')
 		{
 			gameStatus = END;
+		}
+		else if (command == 'W' || command == 'w')
+		{
+			string fileName = "K:\217";
+			ofstream saveGame;
+			saveGame.open(fileName);
+
 		}
 		else if (command == 'U' || command == 'u')
 		{
