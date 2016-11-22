@@ -16,7 +16,7 @@
 #include <string>
 #include <iomanip>
 #include <algorithm>
-#include <fstream>
+
 
 enum GameStatus { NONE, INPROGRESS, END };
 enum Winner {NOBODY, WHITE, BLACK};
@@ -192,11 +192,11 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	int oldRow, oldCol, newRow, newCol;
 
 	cout << "M - Move Piece"
-		 << endl
+		 << "\t\t        "
 		 << "U - Undo Move"
 	 	 << endl
 		 << "W - Write Game to File"
-		 << endl
+		 << "\t\t"
 		 << "E - End Game"
 		 << endl
 		 << gameBoard->getTurn()
@@ -226,9 +226,18 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		}
 		else if (command == 'W' || command == 'w')
 		{
-			ofstream saveGame;
-			saveGame.open("C:/chessfolder/chessgame.txt");
-
+			try {
+				gameBoard->WriteGame();
+			}
+			catch (string boolWriteFile)
+			{
+				system("CLS");
+				cout << boolWriteFile
+					 << endl;
+			}
+			system("CLS");
+			cout << "GAME WRITTEN TO FILE"
+				 << endl;
 		}
 		else if (command == 'U' || command == 'u')
 		{

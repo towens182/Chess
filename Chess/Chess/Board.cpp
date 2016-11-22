@@ -1,5 +1,5 @@
 #include "Board.h"
-
+#include <fstream>
 Board::Board()
 {
 	this->turn = WHITE;
@@ -90,6 +90,29 @@ bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
 			 << endl;
 		return false;
 	}
+}
+void Board::WriteGame()
+{
+	using namespace std;
+	
+	ofstream saveGame;
+	saveGame.open("K:/chessfolder/chessgame.txt");
+
+	if (saveGame.fail())
+	{
+		throw string("\t\t***** FILE OPENING FAILED *****");
+	}
+	for(int i = 0; i < 8; i++)
+		for (int j = 0; j < 8; j++)
+		{
+			if (pieces[i][j] != nullptr)
+			{
+				saveGame << pieces[i][j]->getPieceName()
+					<< " " << i << "," << j << endl;
+			}
+		}
+	saveGame.close();
+
 }
 //Returns who has the current turn
 std::string Board::getTurn()
