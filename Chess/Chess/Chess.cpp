@@ -226,9 +226,8 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		}
 		else if (command == 'W' || command == 'w')
 		{
-			string fileName = "K:\217";
 			ofstream saveGame;
-			saveGame.open(fileName);
+			saveGame.open("C:/chessfolder/chessgame.txt");
 
 		}
 		else if (command == 'U' || command == 'u')
