@@ -96,12 +96,14 @@ void Board::WriteGame()
 	using namespace std;
 	
 	ofstream saveGame;
-	saveGame.open("K:/chessfolder/chessgame.txt");
+	saveGame.open("C:/chessfolder/chessgame.txt");
 
 	if (saveGame.fail())
 	{
 		throw string("\t\t***** FILE OPENING FAILED *****");
 	}
+	saveGame << turn << endl;
+
 	for(int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
 		{
@@ -111,8 +113,20 @@ void Board::WriteGame()
 					<< " " << i << "," << j << endl;
 			}
 		}
+	saveGame << 'X';
 	saveGame.close();
 
+}
+void Board::setTurn(int whoseTurn)
+{
+	if (whoseTurn == 0)
+	{
+		this->turn = WHITE;
+	}
+	else if (whoseTurn == 1)
+	{
+		this->turn = BLACK;
+	}
 }
 //Returns who has the current turn
 std::string Board::getTurn()

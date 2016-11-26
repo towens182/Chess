@@ -16,6 +16,7 @@
 #include <string>
 #include <iomanip>
 #include <algorithm>
+#include <fstream>
 
 
 enum GameStatus { NONE, INPROGRESS, END };
@@ -23,6 +24,7 @@ enum Winner {NOBODY, WHITE, BLACK};
 void Menu(GameStatus& gameStatus, Board *gameBoard);
 void DrawBoard(GameStatus& gameStatus, Board *gameBoard);
 void CreatePieces(Board *gameBoard);
+void LoadGame(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
 void Cleanup(Board *gameBoard, Winner gameWinner);
 bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
@@ -66,11 +68,28 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 
 			if (command == 'S' || command == 's')
 			{
-				CreatePieces(gameBoard);
+				char ans;
 				gameStatus = INPROGRESS;
-				system("CLS");
-				cout << "\t\t***** NEW CHESS GAME STARTED *****"
-					 << endl;	
+					system("CLS");
+					cout << "Would you like to load a saved game? (Y/N) ";
+					cin >> ans;
+					if (ans == 'Y' || ans == 'y')
+					{
+			
+						LoadGame(gameBoard);
+						system("CLS");
+						cout << "\t\t***** CHESS GAME LOADED *****"
+							<< endl;
+		
+					}
+					else if (ans == 'n' || ans == 'N')
+					{
+						CreatePieces(gameBoard);
+						system("CLS");
+						cout << "\t\t***** NEW CHESS GAME STARTED *****"
+							<< endl;
+					}
+				
 			}
 			//If user tries to enter a command before starting a game
 			//tell them and retry menu
@@ -105,11 +124,11 @@ void DrawBoard(GameStatus& gameStatus, Board *gameBoard)
 	};
 	//Display turn and game status for user
 	cout << "\t  Turn: "
-		<< gameBoard->getTurn()
-		<< "\tGame Status: "
-		<< StatusTypes[gameStatus]
-		<< endl
-		<< endl;
+		 << gameBoard->getTurn()
+		 << "\tGame Status: "
+		 << StatusTypes[gameStatus]
+		 << endl
+		 << endl;
 	cout << "\t  -----------------------------------------"
 		 <<endl;
 	for (int x = 7; x >= 0; x--)
@@ -118,7 +137,7 @@ void DrawBoard(GameStatus& gameStatus, Board *gameBoard)
 		for (int y = 0; y < 8; y++)
 		{
 			//Just print spaces for square if there is no piece occupying it
-			if (gameBoard->pieces[x][y] == NULL)
+			if (gameBoard->pieces[x][y] == nullptr)
 			{
 				cout << "   | ";
 			}
@@ -147,7 +166,7 @@ void CreatePieces(Board *gameBoard)
 	for(int x = 0; x < 8; x++)
 		for (int y = 0; y < 8; y++)
 		{
-			gameBoard->pieces[x][y] = NULL;
+			gameBoard->pieces[x][y] = nullptr;
 		}
 
 	//Create White Pieces
@@ -181,6 +200,77 @@ void CreatePieces(Board *gameBoard)
 	{
 		gameBoard->pieces[6][y] = new Pawn('B');
 	}
+}
+void LoadGame(Board * gameBoard)
+{
+	using namespace std;
+
+	ifstream saveGame;
+	saveGame.open("C:/chessfolder/chessgame.txt");
+
+	char turn;
+	char color;
+	char piece;
+	int row;
+	int col;
+	char line;
+
+	//Initialize all array locations to NULL
+	for (int x = 0; x < 8; x++)
+		for (int y = 0; y < 8; y++)
+		{
+			gameBoard->pieces[x][y] = nullptr;
+		}
+
+	turn = (saveGame.get() - '0');
+	saveGame.ignore();
+	gameBoard->setTurn(turn);
+
+			while (saveGame.peek() != 'X')
+			{
+				line = ' ';
+				while (line != '\n')
+				{
+					color = saveGame.get();
+					piece = saveGame.get();
+					if (saveGame.peek() == ' ' || saveGame.peek() == ',')
+					{
+						saveGame.ignore();
+					}
+					row = (saveGame.get() - '0');
+					if (saveGame.peek() == ' ' || saveGame.peek() == ',')
+					{
+						saveGame.ignore();
+					}
+					col = (saveGame.get() - '0');
+					line = saveGame.get();
+				}
+					
+				switch (piece)
+				{
+				case ('B'):
+					gameBoard->pieces[row][col] = new Bishop(color);
+					break;
+				case ('K'):
+					gameBoard->pieces[row][col] = new King(color);
+					break;
+				case ('N'):
+					gameBoard->pieces[row][col] = new Knight(color);
+					break;
+				case ('P'):
+					gameBoard->pieces[row][col] = new Pawn(color);
+					break;
+				case ('Q'):
+					gameBoard->pieces[row][col] = new Queen(color);
+					break;
+				case ('R'):
+					gameBoard->pieces[row][col] = new Rook(color);
+					break;
+				default:
+					break;
+				}
+			}
+	saveGame.close();
 }
 //Get user's input, do they want to move or end the game
 void Move(GameStatus& gameStatus, Board * gameBoard)
