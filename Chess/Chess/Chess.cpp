@@ -241,55 +241,63 @@ void LoadGame(Board * gameBoard)
 		{
 			gameBoard->pieces[x][y] = nullptr;
 		}
+	if (saveGame.peek() == '0' || saveGame.peek() == '1')
+	{
 
-	turn = (saveGame.get() - '0');
-	saveGame.ignore();
-	gameBoard->setTurn(turn);
+		turn = (saveGame.get() - '0');
+		saveGame.ignore();
+		gameBoard->setTurn(turn);
 
-			while (saveGame.peek() != 'X')
+		while (saveGame.peek() != 'X')
+		{
+			line = ' ';
+			while (line != '\n')
 			{
-				line = ' ';
-				while (line != '\n')
+				color = saveGame.get();
+				piece = saveGame.get();
+				if (saveGame.peek() == ' ' || saveGame.peek() == ',')
 				{
-					color = saveGame.get();
-					piece = saveGame.get();
-					if (saveGame.peek() == ' ' || saveGame.peek() == ',')
-					{
-						saveGame.ignore();
-					}
-					row = (saveGame.get() - '0');
-					if (saveGame.peek() == ' ' || saveGame.peek() == ',')
-					{
-						saveGame.ignore();
-					}
-					col = (saveGame.get() - '0');
-					line = saveGame.get();
+					saveGame.ignore();
 				}
-					
-				switch (piece)
+				row = (saveGame.get() - '0');
+				if (saveGame.peek() == ' ' || saveGame.peek() == ',')
 				{
-				case ('B'):
-					gameBoard->pieces[row][col] = new Bishop(color);
-					break;
-				case ('K'):
-					gameBoard->pieces[row][col] = new King(color);
-					break;
-				case ('N'):
-					gameBoard->pieces[row][col] = new Knight(color);
-					break;
-				case ('P'):
-					gameBoard->pieces[row][col] = new Pawn(color);
-					break;
-				case ('Q'):
-					gameBoard->pieces[row][col] = new Queen(color);
-					break;
-				case ('R'):
-					gameBoard->pieces[row][col] = new Rook(color);
-					break;
-				default:
-					break;
+					saveGame.ignore();
 				}
+				col = (saveGame.get() - '0');
+				line = saveGame.get();
 			}
+
+			switch (piece)
+			{
+			case ('B'):
+				gameBoard->pieces[row][col] = new Bishop(color);
+				break;
+			case ('K'):
+				gameBoard->pieces[row][col] = new King(color);
+				break;
+			case ('N'):
+				gameBoard->pieces[row][col] = new Knight(color);
+				break;
+			case ('P'):
+				gameBoard->pieces[row][col] = new Pawn(color);
+				break;
+			case ('Q'):
+				gameBoard->pieces[row][col] = new Queen(color);
+				break;
+			case ('R'):
+				gameBoard->pieces[row][col] = new Rook(color);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	else
+	{
+		saveGame.close();
+		throw string("\t\t****** NO SAVED GAME AVAILABLE *****");
+	}
 	saveGame.close();
 }
 //Get user's input, do they want to move or end the game
@@ -336,17 +344,9 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		}
 		else if (command == 'W' || command == 'w')
 		{
-			try {
-				gameBoard->WriteGame();
-			}
-			catch (string boolWriteFile)
-			{
-				system("CLS");
-				cout << boolWriteFile
-					 << endl;
-			}
+			gameBoard->WriteGame();
 			system("CLS");
-			cout << "GAME WRITTEN TO FILE"
+			cout << "\t\t***** GAME WRITTEN TO FILE *****"
 				 << endl;
 		}
 		else if (command == 'U' || command == 'u')
