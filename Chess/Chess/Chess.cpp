@@ -17,6 +17,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <fstream>
+#include <exception>
 
 
 enum GameStatus { NONE, INPROGRESS, END };
@@ -71,15 +72,27 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 				char ans;
 				gameStatus = INPROGRESS;
 					system("CLS");
-					cout << "Would you like to load a saved game? (Y/N) ";
+					cout << "\t\t***** WELCOME TO CHESS *****" << endl << endl
+						 << "Would you like to load a saved game"
+						 << endl
+						 << "from C:/chessfolder/chessgame.txt? (Y/N) ";
 					cin >> ans;
 					if (ans == 'Y' || ans == 'y')
 					{
-			
-						LoadGame(gameBoard);
-						system("CLS");
-						cout << "\t\t***** CHESS GAME LOADED *****"
-							<< endl;
+						try 
+						{
+							LoadGame(gameBoard);
+							system("CLS");
+							cout << "\t\t***** CHESS GAME LOADED *****"
+								 << endl;
+						}
+						catch (string message)
+						{
+							system("CLS");
+							cout << message
+								 << endl;
+							Menu(gameStatus, gameBoard);
+						}
 		
 					}
 					else if (ans == 'n' || ans == 'N')
@@ -87,7 +100,11 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 						CreatePieces(gameBoard);
 						system("CLS");
 						cout << "\t\t***** NEW CHESS GAME STARTED *****"
-							<< endl;
+							 << endl;
+					}
+					else
+					{
+						throw string("\t\t***** NOT A VALID INPUT!! *****");
 					}
 				
 			}
@@ -207,7 +224,10 @@ void LoadGame(Board * gameBoard)
 
 	ifstream saveGame;
 	saveGame.open("C:/chessfolder/chessgame.txt");
-
+	if (saveGame.fail())
+	{
+		throw string("\t\t****** NO SAVED GAME AVAILABLE *****");
+	}
 	char turn;
 	char color;
 	char piece;
@@ -282,11 +302,11 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 	int oldRow, oldCol, newRow, newCol;
 
 	cout << "M - Move Piece"
-		 << "\t\t        "
+		 << "\t\t\t           "
 		 << "U - Undo Move"
 	 	 << endl
-		 << "W - Write Game to File"
-		 << "\t\t"
+		 << "W - Write C:/chessfolder/chessgame.txt"
+		 << "\t   "
 		 << "E - End Game"
 		 << endl
 		 << gameBoard->getTurn()
@@ -379,6 +399,7 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 	{
 		stack.pop();
 	}
+	delete gameBoard;
 	system("CLS");
 	cout << "\t\t***** GAME OVER *****"
 		 << endl
