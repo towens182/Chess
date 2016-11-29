@@ -20,8 +20,6 @@ public:
 	~Board();
 	void move(std::string piece, int oldX, int oldY, int newX, int newY, Stack& stack);
 	bool Undo(Stack& stack);
-	bool validPiece(std::string piece, int oldX, int oldY);
-	bool validDestination(int oldX, int oldY, int newX, int newY);
 	void WriteGame();
 	void setTurn(int);
 };

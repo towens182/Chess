@@ -10,8 +10,30 @@ Board::~Board()
 }
 void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol, Stack& stack)
 {
-	if (validDestination(oldRow, oldCol, newRow, newCol) && validPiece(piece, oldRow, oldCol))
-	{
+	using namespace std;
+
+		if ((pieces[oldRow][oldCol] == nullptr) || (this->turn != pieces[oldRow][oldCol]->player))
+		{
+			throw string("***** INCORRECT LOCATION CHOSEN, TRY AGAIN ******");
+		}
+
+		if ((piece != pieces[oldRow][oldCol]->getPieceName()) || (this->turn != pieces[oldRow][oldCol]->player))
+		{
+			throw string("***** INCORRECT PIECE CHOSEN, TRY AGAIN ******");
+		}
+		//Make sure locations are valid numbers between 0-7
+		if ((oldRow < 8) && (oldCol < 8) && (newRow >= 0) && (newCol >= 0))
+		{
+			if ((pieces[newRow][newCol] != nullptr) && (pieces[oldRow][oldCol]->player == pieces[newRow][newCol]->player))
+			{
+				throw string("***** INCORRECT DESINATION CHOSEN, TRY AGAIN ******");
+			}
+		}
+		else
+		{
+			throw string("***** ROW AND COL MUST BE BETWEEN 0 - 7 *****");
+		}
+
 		//Check if the selected piece can do the move (It's own unique move)
 		if (pieces[oldRow][oldCol]->Move())
 		{
@@ -27,70 +49,6 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 			newTurn();
 		}
 	}
-	else
-	{
-		return;
-	}
-}
-
-//Makes sure the piece chosen belongs to the right player
-//and in the chosen destination
-bool Board::validPiece(std::string piece, int oldRow, int oldCol)
-{
-	using namespace std;
-	if ((pieces[oldRow][oldCol] == nullptr) || (this->turn != pieces[oldRow][oldCol]->player))
-	{
-		cout << "***** INCORRECT LOCATION CHOSEN ******"
-			 << endl;
-		return false;
-	}
-	else
-	{
-		if ((piece == pieces[oldRow][oldCol]->getPieceName()) && (this->turn == pieces[oldRow][oldCol]->player))
-		{
-			return true;
-		}
-		else
-		{
-			system("CLS");
-			cout << "***** INCORRECT PIECE CHOSEN, TRY AGAIN "
-				<< getTurn()
-				<< " ******"
-				<< endl;
-			return false;
-		}
-	}
-}
-//Makes sure the new desination is a valid square on the board
-//and is either empty or opposite piece
-bool Board::validDestination(int oldRow, int oldCol, int newRow, int newCol)
-{
-	using namespace std;
-	//Make sure locations are valid numbers between 0-7
-	if ((oldRow < 8) && (oldCol < 8) && (newRow >= 0) && (newCol >= 0))
-	{
-		if ((pieces[newRow][newCol] == nullptr) || (pieces[oldRow][oldCol]->player != pieces[newRow][newCol]->player))
-		{
-			return true;
-		}
-		else
-		{
-			system("CLS");
-			cout << "***** INCORRECT DESINATION CHOSEN, TRY AGAIN "
-				<< getTurn()
-				<< " ******"
-				<< endl;
-			return false;
-		}
-	}
-	else
-	{
-		system("CLS");
-		cout << "***** ROW AND COL MUST BE BETWEEN 0 - 7 *****"
-			 << endl;
-		return false;
-	}
-}
 void Board::WriteGame()
 {
 	using namespace std;

@@ -28,7 +28,7 @@ void CreatePieces(Board *gameBoard);
 void LoadGame(Board *gameBoard);
 void Move(GameStatus& gameStatus, Board *gameBoard);
 void Cleanup(Board *gameBoard, Winner gameWinner);
-bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
+void GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol);
 Stack stack;
 
 int main()
@@ -319,11 +319,9 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 			cin >> piece;
 			transform(piece.begin(), piece.end(), piece.begin(), ::toupper);
 			
-			if (GetInput(oldRow, oldCol, newRow, newCol))
-			{
-				system("CLS");
-				gameBoard->move(piece, oldRow, oldCol, newRow, newCol, stack);
-			}
+			GetInput(oldRow, oldCol, newRow, newCol);
+			system("CLS");
+			gameBoard->move(piece, oldRow, oldCol, newRow, newCol, stack);
 		}
 		else if (command == 'E' || command == 'e')
 		{
@@ -342,7 +340,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 			if (gameBoard->Undo(stack))
 			{
 				system("CLS");
-				cout << "UNDO SUCCESSFUL"
+				cout << "\t\t***** UNDO SUCCESSFUL ******"
 					 << endl;
 			}
 			else 
@@ -400,7 +398,7 @@ void Cleanup(Board * gameBoard, Winner gameWinner)
 		 << endl;
 }
 //Gets line of current locations and source destinations
-bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
+void GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 {
 	using namespace std;
 
@@ -419,10 +417,7 @@ bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 	}
 	else
 	{
-		system("CLS");
-		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
-			 << endl;
-		return false;
+		throw string("***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****");
 	}
 
 	if (isdigit(input[1]))
@@ -431,10 +426,7 @@ bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 	}
 	else
 	{
-		system("CLS");
-		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
-			<< endl;
-		return false;
+		throw string("***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****");
 	}
 
 	if (isdigit(input[2]))
@@ -443,10 +435,7 @@ bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 	}
 	else
 	{
-		system("CLS");
-		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
-			<< endl;
-		return false;
+		throw string("***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****");
 	}
 
 	if (isdigit(input[3]))
@@ -455,11 +444,6 @@ bool GetInput(int& oldRow, int& oldCol, int& newRow, int& newCol)
 	}
 	else
 	{
-		system("CLS");
-		cout << "***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****"
-			<< endl;
-		return false;
+		throw string("***** INCORRECT LOCATION - MUST BE INTEGERS 0 - 7 *****");
 	}
-
-	return true;
 }
