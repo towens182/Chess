@@ -57,12 +57,11 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 	using namespace std;
 
 	char command;
-		cout
-		     << "S - Start Game" << endl
-			 << "M - Move Piece" << endl
-			 << "U - Undo Move" << endl
-			 << "E - End Game" << endl << endl
-			 << "USER: ";
+	cout << "S - Start Game" << endl
+		 << "M - Move Piece" << endl
+		 << "U - Undo Move" << endl
+		 << "E - End Game" << endl << endl
+		 << "USER: ";
 		try
 		{
 			cin >> command;
@@ -79,21 +78,10 @@ void Menu(GameStatus& gameStatus, Board *gameBoard)
 					cin >> ans;
 					if (ans == 'Y' || ans == 'y')
 					{
-						try 
-						{
 							LoadGame(gameBoard);
 							system("CLS");
 							cout << "\t\t***** CHESS GAME LOADED *****"
 								 << endl;
-						}
-						catch (string message)
-						{
-							system("CLS");
-							cout << message
-								 << endl;
-							Menu(gameStatus, gameBoard);
-						}
-		
 					}
 					else if (ans == 'n' || ans == 'N')
 					{
@@ -243,7 +231,6 @@ void LoadGame(Board * gameBoard)
 		}
 	if (saveGame.peek() == '0' || saveGame.peek() == '1')
 	{
-
 		turn = (saveGame.get() - '0');
 		saveGame.ignore();
 		gameBoard->setTurn(turn);
