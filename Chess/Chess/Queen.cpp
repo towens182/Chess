@@ -27,7 +27,6 @@ Queen::~Queen()
 //Check if the desired move is possible for Queen
 bool Queen::Move()
 {
-	std::cout << std::endl;
 	if (this->player == WHITE)
 	{
 		std::cout << "WHITE";

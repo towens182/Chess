@@ -27,7 +27,6 @@ Bishop::~Bishop()
 //Check if the desired move is possible for Bishop
 bool Bishop::Move()
 {
-	std::cout << std::endl;
 	if (this->player == WHITE)
 	{
 		std::cout << "WHITE";

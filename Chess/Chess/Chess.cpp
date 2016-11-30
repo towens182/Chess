@@ -321,7 +321,7 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 			
 			GetInput(oldRow, oldCol, newRow, newCol);
 			system("CLS");
-			gameBoard->move(piece, oldRow, oldCol, newRow, newCol, stack);
+			gameBoard->Move(piece, oldRow, oldCol, newRow, newCol, stack);
 		}
 		else if (command == 'E' || command == 'e')
 		{

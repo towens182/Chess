@@ -8,7 +8,7 @@ Board::Board()
 Board::~Board()
 {
 }
-void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newCol, Stack& stack)
+void Board::Move(std::string piece, int oldRow, int oldCol, int newRow, int newCol, Stack& stack)
 {
 	using namespace std;
 
@@ -42,7 +42,6 @@ void Board::move(std::string piece, int oldRow, int oldCol, int newRow, int newC
 			SM->setValues(oldRow, oldCol, newRow, newCol);
 			stack.push(SM);
 
-			//pieces[newRow][newCol] = NULL;
 			pieces[newRow][newCol] = pieces[oldRow][oldCol];
 			pieces[oldRow][oldCol] = nullptr;
 			
@@ -71,7 +70,6 @@ void Board::WriteGame()
 					<< " " << i << "," << j;
 			}
 		}
-	//saveGame << 'X';
 	saveGame.close();
 
 }

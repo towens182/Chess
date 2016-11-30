@@ -18,7 +18,7 @@ public:
 
 	Board();
 	~Board();
-	void move(std::string piece, int oldX, int oldY, int newX, int newY, Stack& stack);
+	void Move(std::string piece, int oldX, int oldY, int newX, int newY, Stack& stack);
 	bool Undo(Stack& stack);
 	void WriteGame();
 	void setTurn(int);
