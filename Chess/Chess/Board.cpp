@@ -60,18 +60,18 @@ void Board::WriteGame()
 	{
 		throw string("\t\t***** FILE OPENING FAILED *****");
 	}
-	saveGame << turn << endl;
+	saveGame << turn;
 
 	for(int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
 		{
 			if (pieces[i][j] != nullptr)
 			{
-				saveGame << pieces[i][j]->getPieceName()
-					<< " " << i << "," << j << endl;
+				saveGame << endl << pieces[i][j]->getPieceName()
+					<< " " << i << "," << j;
 			}
 		}
-	saveGame << 'X';
+	//saveGame << 'X';
 	saveGame.close();
 
 }

@@ -235,11 +235,9 @@ void LoadGame(Board * gameBoard)
 		saveGame.ignore();
 		gameBoard->setTurn(turn);
 
-		while (saveGame.peek() != 'X')
+		while (!saveGame.eof())
 		{
-			line = ' ';
-			while (line != '\n')
-			{
+			
 				color = saveGame.get();
 				piece = saveGame.get();
 				if (saveGame.peek() == ' ' || saveGame.peek() == ',')
@@ -252,8 +250,10 @@ void LoadGame(Board * gameBoard)
 					saveGame.ignore();
 				}
 				col = (saveGame.get() - '0');
-				line = saveGame.get();
-			}
+				if (saveGame.peek() == '\n')
+				{
+					saveGame.ignore();
+				}
 
 			switch (piece)
 			{
