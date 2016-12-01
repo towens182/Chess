@@ -336,19 +336,11 @@ void Move(GameStatus& gameStatus, Board * gameBoard)
 		}
 		else if (command == 'U' || command == 'u')
 		{
-			
-			if (gameBoard->Undo(stack))
-			{
+				gameBoard->Undo(stack);
 				system("CLS");
 				cout << "\t\t***** UNDO SUCCESSFUL ******"
 					 << endl;
-			}
-			else 
-			{
-				throw string("\t\t****** NO TURNS TO UNDO ******");
-			}
-
-		}
+		}	
 		else
 		{
 			throw string("\t\t***** NOT A VALID INPUT!! *****");

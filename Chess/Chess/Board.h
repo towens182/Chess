@@ -14,12 +14,10 @@ public:
 	Board::Turn turn;
 	void newTurn();
 
-	bool Undo(Stack * stack);
-
 	Board();
 	~Board();
 	void Move(std::string piece, int oldX, int oldY, int newX, int newY, Stack& stack);
-	bool Undo(Stack& stack);
+	void Undo(Stack& stack);
 	void WriteGame();
 	void setTurn(int);
 };

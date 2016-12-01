@@ -109,17 +109,17 @@ void Board::newTurn()
 	}
 }
 
-bool Board::Undo(Stack& stack)
+void Board::Undo(Stack& stack)
 {
+	using namespace std;
 	if (!stack.isEmpty())
 	{
 		pieces[stack.getOldRow()][stack.getOldCol()] = stack.getMoved();
 		pieces[stack.getNewRow()][stack.getNewCol()] = stack.getCaptured();
 		stack.pop();
-		return true;
 	}
 	else
 	{
-		return false;
+		throw string("\t\t***** NO TURNS TO UNDO *****");
 	}
 }
